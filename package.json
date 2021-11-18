@@ -1,0 +1,6 @@
+{
+  "workspaces": [
+    "packages/zola-bin",
+    "packages/zola-template"
+  ]
+}
