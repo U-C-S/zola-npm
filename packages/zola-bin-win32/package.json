@@ -1,0 +1,10 @@
+{
+  "name": "zola-bin-win32",
+  "version": "0.0.1",
+  "description": "The binary file of Zola",
+  "type": "module",
+  "os": [
+    "win32"
+  ],
+  "license": "MIT"
+}

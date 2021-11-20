@@ -1,0 +1,10 @@
+{
+  "name": "zola-bin-linux",
+  "version": "0.0.1",
+  "description": "The binary file of Zola",
+  "type": "module",
+  "os": [
+    "linux"
+  ],
+  "license": "MIT"
+}

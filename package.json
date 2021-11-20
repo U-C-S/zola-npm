@@ -1,6 +1,8 @@
 {
   "workspaces": [
     "packages/zola-bin",
-    "packages/zola-template"
+    "packages/zola-bin-darwin",
+    "packages/zola-bin-linux",
+    "packages/zola-bin-win32"
   ]
 }
