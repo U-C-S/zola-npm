@@ -2,6 +2,7 @@
 
 import childProcess from "child_process";
 import { createRequire } from "module";
+import path from "path";
 
 const require = createRequire(import.meta.url);
 const platform = process.platform;
@@ -26,15 +27,18 @@ function getZolaPath() {
   //   return ZOLA_BINARY_PATH;
   // }
 
-  const { pkgName, subpath } = CurrentPlatformPackage();
+  const { name, subpath } = CurrentPlatformPackage();
 
   try {
-    return require.resolve(`${pkgName}/${subpath}`);
+    let x = require.resolve("zola-bin");
+    x = path.join(x, "../../", name, subpath);
+    console.log(x);
+    return x;
   } catch (e) {
     throw new Error("Could not find platform specific zola-bin");
   }
 }
 
-childProcess.execSync(getZolaPath(), process.argv.slice(2), {
+childProcess.execFileSync(getZolaPath(), process.argv.slice(2), {
   stdio: "inherit",
 });

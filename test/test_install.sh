@@ -9,6 +9,6 @@ npm pack --pack-destination ../../test/ZolaTest
 cd ../../test/ZolaTest
 
 npm init -y
-npm install ./zola-bin-*.tgz cowsay
+npm install --prefer-offline --no-audit ./zola-bin-*.tgz cowsay
 npm exec -c 'cowsay Zola'
 npm exec -c 'zola-bin --version'
