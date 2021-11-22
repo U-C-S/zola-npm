@@ -1,10 +1,4 @@
 {
-  "workspaces": [
-    "packages/zola-bin",
-    "packages/zola-bin-darwin",
-    "packages/zola-bin-linux",
-    "packages/zola-bin-win32"
-  ],
   "scripts": {
     "test_install": "sh ./test/test_install.sh"
   }
