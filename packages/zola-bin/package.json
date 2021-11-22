@@ -1,12 +1,9 @@
 {
   "name": "zola-bin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "The binary file of Zola",
   "type": "module",
-  "scripts": {
-    "postinstall": "node install.js"
-  },
-  "bin": "./zola.js",
+  "bin": "bin/zola.js",
   "keywords": [
     "zola",
     "bin"
