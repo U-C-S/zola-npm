@@ -1,18 +1,31 @@
 {
   "name": "zola-bin",
-  "version": "0.0.2",
-  "description": "The binary file of Zola",
+  "version": "0.0.3",
+  "description": "Zola, A Static Site Generator, as a NPM Package",
+  "repository": "U-C-S/zola-tools",
+  "homepage": "https://github.com/getzola/zola",
   "type": "module",
   "bin": "bin/zola.js",
-  "keywords": [
-    "zola",
-    "bin"
-  ],
   "author": "U-C-S",
   "license": "MIT",
   "optionalDependencies": {
     "zola-bin-darwin": "latest",
     "zola-bin-linux": "latest",
     "zola-bin-win32": "latest"
-  }
+  },
+  "keywords": [
+    "zola",
+    "tera",
+    "static-site-generator",
+    "ssg",
+    "markdown",
+    "rust",
+    "html",
+    "scss",
+    "sass",
+    "bin",
+    "cil",
+    "front-end",
+    "framework"
+  ]
 }

@@ -5,7 +5,6 @@ import { createRequire } from "module";
 
 const require = createRequire(import.meta.url);
 const platform = process.platform;
-const ZOLA_BINARY_PATH = process.env.ZOLA_BINARY_PATH || ZOLA_BINARY_PATH;
 
 const zolaPackages = {
   win32: { name: "zola-bin-win32", subpath: "zola.exe" },
@@ -22,9 +21,10 @@ function CurrentPlatformPackage() {
 }
 
 function getZolaPath() {
-  if (ZOLA_BINARY_PATH) {
-    return ZOLA_BINARY_PATH;
-  }
+  // const ZOLA_BINARY_PATH = process.env.ZOLA_BINARY_PATH;
+  // if (ZOLA_BINARY_PATH) {
+  //   return ZOLA_BINARY_PATH;
+  // }
 
   const { pkgName, subpath } = CurrentPlatformPackage();
 
