@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 
-rm -r ./test/ZolaTest
-mkdir ./test/ZolaTest
+rm -r ./tests/ZolaTest
+mkdir ./tests/ZolaTest
 
 cd ./packages/zola-bin
-npm pack --pack-destination ../../test/ZolaTest
+npm pack --pack-destination ../../tests/ZolaTest
 
-cd ../../test/ZolaTest
+cd ../../tests/ZolaTest
 
 npm init -y
 npm install --prefer-offline --no-audit ./zola-bin-*.tgz cowsay

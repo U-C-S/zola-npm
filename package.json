@@ -1,5 +1,5 @@
 {
   "scripts": {
-    "test_install": "sh ./test/test_install.sh"
+    "test_install": "sh ./tests/test_install.sh"
   }
 }
