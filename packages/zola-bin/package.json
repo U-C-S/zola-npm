@@ -2,7 +2,11 @@
   "name": "zola-bin",
   "version": "0.0.6",
   "description": "Zola, A Static Site Generator, as a NPM Package",
-  "repository": "U-C-S/zola-tools",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/U-C-S/zola-tools",
+    "directory": "packages/zola-bin"
+  },
   "homepage": "https://github.com/getzola/zola",
   "type": "module",
   "main": "main.js",
@@ -25,7 +29,7 @@
     "scss",
     "sass",
     "bin",
-    "cil",
+    "cli",
     "front-end",
     "framework"
   ]
