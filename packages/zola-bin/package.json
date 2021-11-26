@@ -1,6 +1,6 @@
 {
   "name": "zola-bin",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Zola, A Static Site Generator, as a NPM Package",
   "repository": {
     "type": "git",
