@@ -1,6 +1,6 @@
 {
   "name": "zola-bin-darwin",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The binary file of Zola",
   "type": "module",
   "repository": {

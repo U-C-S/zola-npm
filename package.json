@@ -1,5 +1,20 @@
 {
+  "name": "zola-tooling-project",
+  "version": "0.1.0",
+  "private": true,
+  "workspaces": [
+    "packages/create-zola-site",
+    "packages/zola-bin"
+  ],
   "scripts": {
     "test_install": "sh ./tests/test_install.sh"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.10"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "printWidth": 110
   }
 }

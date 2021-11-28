@@ -12,27 +12,9 @@
   "bin": {
     "create-zola-site": "./dist/index.js"
   },
-  "files": [
-    "dist"
-  ],
-  "scripts": {
-    "dev": "ncc build ./index.ts -w -o dist/",
-    "prerelease": "rimraf ./dist/",
-    "release": "ncc build ./index.ts -o ./dist/ --minify --no-cache --no-source-map-register",
-    "prepublish": "yarn release"
-  },
-  "devDependencies": {
-    "@types/node": "^16.11.10",
-    "@types/prompts": "2.0.14",
-    "@types/rimraf": "3.0.2",
-    "@vercel/ncc": "0.32.0",
-    "chalk": "4.1.2",
-    "commander": "8.3.0",
-    "cpy": "8.1.2",
-    "cross-spawn": "7.0.3",
-    "prompts": "2.4.2",
-    "rimraf": "3.0.2",
-    "update-check": "1.5.4"
+  "dependencies": {
+    "commander": "^8.3.0",
+    "zola-bin": "0.0.7"
   },
   "engines": {
     "node": ">=14.18.0"
