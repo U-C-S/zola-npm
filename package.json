@@ -1,20 +1,28 @@
 {
-  "name": "zola-tooling-project",
-  "version": "0.1.0",
-  "private": true,
-  "workspaces": [
-    "packages/create-zola-site",
-    "packages/zola-bin"
-  ],
-  "scripts": {
-    "test_install": "sh ./tests/test_install.sh"
-  },
-  "devDependencies": {
-    "@types/node": "^16.11.10"
-  },
-  "prettier": {
-    "trailingComma": "es5",
-    "tabWidth": 2,
-    "printWidth": 110
-  }
+	"name": "zola-tooling-project",
+	"version": "0.1.0",
+	"private": true,
+	"type": "module",
+	"workspaces": [
+		"packages/create-zola-site",
+		"packages/zola-bin"
+	],
+	"scripts": {
+		"get-zola-bin": "node ./scripts/getzola.js",
+		"test-install": "sh ./tests/test_install.sh"
+	},
+	"dependencies": {
+		"node-fetch": "^3.1.0"
+	},
+	"devDependencies": {
+		"@types/node": "^16.11.10",
+		"ts-node": "^10.4.0",
+		"typescript": "^4.5.2"
+	},
+	"prettier": {
+		"trailingComma": "es5",
+		"tabWidth": 2,
+		"useTabs": true,
+		"printWidth": 110
+	}
 }
