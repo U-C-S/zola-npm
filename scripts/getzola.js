@@ -1,14 +1,17 @@
 import fetch from "node-fetch";
+import { Octokit } from "@octokit/rest";
 import path from "path";
 import fs from "fs";
 import https from "https";
+import zlib from "zlib";
 
-const ZolaGithubReleaseAPI = "https://api.github.com/repos/getzola/zola/releases";
-
-async function CallGithubAPI(url) {
-	const res = await fetch(url);
-	return await res.json();
-}
+// const ZolaGithubReleaseAPI = "https://api.github.com/repos/getzola/zola/releases";
+console.log("Downloading Zola...");
+let ZolaGithubReleasesAPI = new Octokit().repos.getReleaseByTag({
+	owner: "getzola",
+	repo: "zola",
+	tag: "v0.15.2",
+});
 
 function DownloadFile(fileURL, dest) {
 	return new Promise((resolve, reject) => {
@@ -26,17 +29,19 @@ function DownloadFile(fileURL, dest) {
 	});
 }
 
-CallGithubAPI(ZolaGithubReleaseAPI).then((data) => {
-	let latestRelease = data[0].assets;
-	let downloadCacheDir = "./.cache/zola_bin";
-	fs.mkdirSync(downloadCacheDir, { recursive: true });
+let api = await ZolaGithubReleasesAPI;
+let latestReleases = api.data.assets;
 
-	latestRelease.forEach((r) => {
-		const destf = path.join(downloadCacheDir, r.name);
-		const dest = fs.createWriteStream(destf);
+let downloadCacheDir = "./.cache/zola_bin";
+fs.mkdirSync(downloadCacheDir, { recursive: true });
 
-		DownloadFile(r.browser_download_url, dest).then(() => {
-			console.log("Downloaded latest release");
-		});
+latestReleases.forEach((r) => {
+	const destf = path.join(downloadCacheDir, r.name);
+	const dest = fs.createWriteStream(destf);
+
+	DownloadFile(r.browser_download_url, dest).then(() => {
+		console.log("Downloaded " + r.name);
 	});
+
+	// zlib.unzipSync(destf);
 });

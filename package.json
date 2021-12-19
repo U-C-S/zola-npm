@@ -12,7 +12,7 @@
 		"test-install": "sh ./tests/test_install.sh"
 	},
 	"dependencies": {
-		"node-fetch": "^3.1.0"
+		"@octokit/rest": "^18.12.0"
 	},
 	"devDependencies": {
 		"@types/node": "^16.11.10",
