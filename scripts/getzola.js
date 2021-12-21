@@ -48,6 +48,7 @@ latestReleases.forEach((r) => {
 		} else if (r.name.includes("tar")) {
 			let platform = r.name.includes("linux") ? "linux" : "darwin";
 			let extract_dest = "./packages/zola-bin-" + platform + "/bin";
+			fs.mkdirSync(extract_dest, { recursive: true });
 			tar.x({ C: extract_dest, file: destf });
 		}
 	});
