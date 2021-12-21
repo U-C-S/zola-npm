@@ -1,9 +1,9 @@
-import fetch from "node-fetch";
-import { Octokit } from "@octokit/rest";
 import path from "path";
 import fs from "fs";
 import https from "https";
-import zlib from "zlib";
+import { Octokit } from "@octokit/rest";
+import extract from "extract-zip";
+import tar from "tar";
 
 // const ZolaGithubReleaseAPI = "https://api.github.com/repos/getzola/zola/releases";
 console.log("Downloading Zola...");
@@ -37,11 +37,18 @@ fs.mkdirSync(downloadCacheDir, { recursive: true });
 
 latestReleases.forEach((r) => {
 	const destf = path.join(downloadCacheDir, r.name);
-	const dest = fs.createWriteStream(destf);
+	const download_dest = fs.createWriteStream(destf);
 
-	DownloadFile(r.browser_download_url, dest).then(() => {
+	DownloadFile(r.browser_download_url, download_dest).then(() => {
 		console.log("Downloaded " + r.name);
-	});
 
-	// zlib.unzipSync(destf);
+		if (r.name.includes("zip")) {
+			let extract_dest = "./packages/zola-bin-win32/";
+			extract(destf, { dir: path.resolve(extract_dest) });
+		} else if (r.name.includes("tar")) {
+			let platform = r.name.includes("linux") ? "linux" : "darwin";
+			let extract_dest = "./packages/zola-bin-" + platform + "/bin";
+			tar.x({ C: extract_dest, file: destf });
+		}
+	});
 });

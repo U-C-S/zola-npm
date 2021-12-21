@@ -12,7 +12,9 @@
 		"test-install": "sh ./tests/test_install.sh"
 	},
 	"dependencies": {
-		"@octokit/rest": "^18.12.0"
+		"@octokit/rest": "^18.12.0",
+		"extract-zip": "^2.0.1",
+		"tar": "^6.1.11"
 	},
 	"devDependencies": {
 		"@types/node": "^16.11.10",
