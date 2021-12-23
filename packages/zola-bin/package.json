@@ -12,7 +12,8 @@
 	"files": [
 		"bin",
 		"dist",
-		"types"
+		"types",
+		"CHANGELOG.md"
 	],
 	"types": "types/main.d.ts",
 	"main": "dist/main.js",
