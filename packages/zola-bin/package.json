@@ -1,36 +1,43 @@
 {
-  "name": "zola-bin",
-  "version": "0.0.7",
-  "description": "Zola, A Static Site Generator, as a NPM Package",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/U-C-S/zola-tools",
-    "directory": "packages/zola-bin"
-  },
-  "homepage": "https://github.com/getzola/zola",
-  "type": "module",
-  "main": "main.js",
-  "bin": "bin/zola.js",
-  "author": "U-C-S",
-  "license": "MIT",
-  "optionalDependencies": {
-    "zola-bin-darwin": "latest",
-    "zola-bin-linux": "latest",
-    "zola-bin-win32": "latest"
-  },
-  "keywords": [
-    "zola",
-    "tera",
-    "static-site-generator",
-    "ssg",
-    "markdown",
-    "rust",
-    "html",
-    "scss",
-    "sass",
-    "bin",
-    "cli",
-    "front-end",
-    "framework"
-  ]
+	"name": "zola-bin",
+	"version": "0.1.0",
+	"description": "Zola, A Static Site Generator, as a NPM Package",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/U-C-S/zola-tools",
+		"directory": "packages/zola-bin"
+	},
+	"homepage": "https://github.com/getzola/zola",
+	"type": "module",
+	"types": "./types/main.d.ts",
+	"main": "dist/main.js",
+	"bin": "bin/zola.js",
+	"author": "U-C-S",
+	"license": "MIT",
+	"optionalDependencies": {
+		"zola-bin-darwin": "latest",
+		"zola-bin-linux": "latest",
+		"zola-bin-win32": "latest"
+	},
+	"devDependencies": {
+		"typescript": "^4.5.4"
+	},
+	"scripts": {
+		"build": "tsc"
+	},
+	"keywords": [
+		"zola",
+		"tera",
+		"static-site-generator",
+		"ssg",
+		"markdown",
+		"rust",
+		"html",
+		"scss",
+		"sass",
+		"bin",
+		"cli",
+		"front-end",
+		"framework"
+	]
 }

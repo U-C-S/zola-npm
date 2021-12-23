@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import { exec } from "../lib/exec.js";
+import { exec } from "../dist/exec.js";
 
 exec(process.argv.slice(2));
