@@ -1,3 +1,4 @@
-import { exec } from "./lib/exec.js";
+import { exec, execSync } from "./exec.js";
 
-export default exec;
+//export default exec;
+export { exec, execSync };

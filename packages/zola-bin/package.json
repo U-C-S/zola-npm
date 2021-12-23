@@ -9,7 +9,12 @@
 	},
 	"homepage": "https://github.com/getzola/zola",
 	"type": "module",
-	"types": "./types/main.d.ts",
+	"files": [
+		"bin",
+		"dist",
+		"types"
+	],
+	"types": "types/main.d.ts",
 	"main": "dist/main.js",
 	"bin": "bin/zola.js",
 	"author": "U-C-S",
@@ -23,7 +28,8 @@
 		"typescript": "^4.5.4"
 	},
 	"scripts": {
-		"build": "tsc"
+		"build": "tsc",
+		"prepare": "tsc"
 	},
 	"keywords": [
 		"zola",
