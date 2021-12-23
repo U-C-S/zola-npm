@@ -5,12 +5,14 @@ import { Octokit } from "@octokit/rest";
 import extract from "extract-zip";
 import tar from "tar";
 
-// const ZolaGithubReleaseAPI = "https://api.github.com/repos/getzola/zola/releases";
-console.log("Downloading Zola...");
+const ZOLA_VERSION = fs.readFileSync("./zola_version.txt", "utf8"); // TODO: support a env variable for zola version for CI/CD
+
+console.log(`Downloading Zola ${ZOLA_VERSION}...`);
+
 let ZolaGithubReleasesAPI = new Octokit().repos.getReleaseByTag({
 	owner: "getzola",
 	repo: "zola",
-	tag: "v0.15.2",
+	tag: ZOLA_VERSION,
 });
 
 function DownloadFile(fileURL, dest) {
@@ -42,10 +44,10 @@ latestReleases.forEach((r) => {
 	DownloadFile(r.browser_download_url, download_dest).then(() => {
 		console.log("Downloaded " + r.name);
 
-		if (r.name.includes("zip")) {
+		if (r.name.includes("windows")) {
 			let extract_dest = "./packages/zola-bin-win32/";
 			extract(destf, { dir: path.resolve(extract_dest) });
-		} else if (r.name.includes("tar")) {
+		} else {
 			let platform = r.name.includes("linux") ? "linux" : "darwin";
 			let extract_dest = "./packages/zola-bin-" + platform + "/bin";
 			fs.mkdirSync(extract_dest, { recursive: true });

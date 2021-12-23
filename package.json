@@ -8,8 +8,8 @@
 		"packages/zola-bin"
 	],
 	"scripts": {
-		"get-zola-bin": "node ./scripts/getzola.js",
-		"test-install": "sh ./tests/test_install.sh"
+		"get_Zola": "node ./scripts/getzola.js",
+		"npm_Install_Test": "sh ./tests/test_install.sh"
 	},
 	"dependencies": {
 		"@octokit/rest": "^18.12.0",
@@ -17,7 +17,7 @@
 		"tar": "^6.1.11"
 	},
 	"devDependencies": {
-		"@types/node": "^16.11.10"
+		"@types/node": "^17.0.4"
 	},
 	"prettier": {
 		"trailingComma": "es5",
