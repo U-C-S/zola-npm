@@ -44,8 +44,8 @@ In your project's `package.json` file, call it inside a script using `zola-bin [
 ### JavaScript API
 
 ```js
-import { exec } from "zola-bin";
+import { execZola } from "zola-bin";
 
 let args = ["serve", "--open"];
-exec(args);
+execZola(args);
 ```

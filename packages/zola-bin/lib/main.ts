@@ -1,4 +1,4 @@
-import { exec, execSync } from "./exec.js";
+import { execZola } from "./exec.js";
 
 //export default exec;
-export { exec, execSync };
+export { execZola };
