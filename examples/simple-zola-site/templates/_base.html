@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {% block head %}
+      <title>{% block title %}{% endblock title %}Hello, Zola</title>
+      <meta charset="utf-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="description" content="{{ config.description }}" />
+      
+      <link rel="stylesheet" href="{{ get_url(path="styles/common.css")}}" />
+    {% endblock head %}
+  </head>
+  <body>
+    {% block content %} {% endblock content %}
+  </body>
+</html>

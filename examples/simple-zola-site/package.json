@@ -1,0 +1,12 @@
+{
+	"type": "module",
+	"scripts": {
+		"dev": "zola-bin serve",
+		"dev-jsapi": "node index.js",
+		"build": "zola-bin build",
+        "init": "zola-bin init --force"
+	},
+	"dependencies": {
+		"zola-bin": "0.1.0"
+	}
+}

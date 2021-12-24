@@ -1,0 +1,11 @@
+{
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"zola-build-help": "node index.js",
+		"zola-version": "zola-bin --version"
+	},
+	"dependencies": {
+		"zola-bin": "0.1.0"
+	}
+}

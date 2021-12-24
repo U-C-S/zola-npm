@@ -1,0 +1,17 @@
+{% extends "_base.html" %}
+
+<!--head-->
+{% block head -%}
+  {{ super() }}
+  <link rel="stylesheet" href="{{ get_url(path="index.css") }}" />
+{% endblock head -%}
+
+
+<!-- prettier-ignore -->
+{% block content %}
+  <main>
+    <h1>Hello, Zola</h1>
+    <p>{{ section.content | safe }}</p>
+  </main>
+  <script src="{{ get_url(path="index.js") }}"></script>
+{% endblock content %}
