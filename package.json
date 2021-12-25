@@ -9,7 +9,8 @@
 	],
 	"scripts": {
 		"get_Zola": "node ./scripts/getzola.js",
-		"npm_Install_Test": "sh ./tests/test_install.sh"
+		"Test_npm_install": "sh ./tests/test_install.sh",
+		"Test_CZS": "sh ./tests/test_czs.sh"
 	},
 	"dependencies": {
 		"@octokit/rest": "^18.12.0",

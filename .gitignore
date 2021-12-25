@@ -2,6 +2,7 @@ node_modules
 .cache
 _dump
 tests/ZolaTest
+tests/ZolaSiteTest
 
 zola.exe
 /packages/zola-bin-darwin/bin/zola
