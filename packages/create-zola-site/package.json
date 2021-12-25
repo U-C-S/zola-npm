@@ -1,20 +1,21 @@
 {
 	"name": "create-zola-site",
-	"version": "0.1.0",
-	"type": "module",
+	"version": "0.0.1",
+	"author": "U-C-S",
+	"license": "MIT",
 	"description": "Create Zola-based websites with one command",
+	"homepage": "https://github.com/U-C-S/zola-tools",
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/U-C-S/zola-tools",
 		"directory": "packages/create-zola-site"
 	},
-	"author": "U-C-S",
-	"license": "MIT",
+	"type": "module",
 	"bin": {
 		"create-zola-site": "./index.js"
 	},
 	"dependencies": {
-		"commander": "^8.3.0",
+		"yargs": "^17.3.1",
 		"zola-bin": "0.2.0"
 	},
 	"engines": {
