@@ -32,6 +32,9 @@
 	"devDependencies": {
 		"typescript": "^4.5.4"
 	},
+	"engines": {
+		"node": ">=16.0.0"
+	},
 	"keywords": [
 		"zola",
 		"tera",

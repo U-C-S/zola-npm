@@ -1,37 +1,38 @@
 {
-  "name": "create-zola-site",
-  "version": "0.0.1",
-  "description": "Create Zola-based websites with one command",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/U-C-S/zola-tools",
-    "directory": "packages/create-zola-site"
-  },
-  "author": "U-C-S",
-  "license": "MIT",
-  "bin": {
-    "create-zola-site": "./dist/index.js"
-  },
-  "dependencies": {
-    "commander": "^8.3.0",
-    "zola-bin": "0.0.7"
-  },
-  "engines": {
-    "node": ">=14.18.0"
-  },
-  "keywords": [
-    "zola",
-    "tera",
-    "static-site-generator",
-    "ssg",
-    "markdown",
-    "rust",
-    "html",
-    "scss",
-    "sass",
-    "bin",
-    "cli",
-    "front-end",
-    "framework"
-  ]
+	"name": "create-zola-site",
+	"version": "0.1.0",
+	"type": "module",
+	"description": "Create Zola-based websites with one command",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/U-C-S/zola-tools",
+		"directory": "packages/create-zola-site"
+	},
+	"author": "U-C-S",
+	"license": "MIT",
+	"bin": {
+		"create-zola-site": "./index.js"
+	},
+	"dependencies": {
+		"commander": "^8.3.0",
+		"zola-bin": "0.2.0"
+	},
+	"engines": {
+		"node": ">=16.0.0"
+	},
+	"keywords": [
+		"zola",
+		"tera",
+		"static-site-generator",
+		"ssg",
+		"markdown",
+		"rust",
+		"html",
+		"scss",
+		"sass",
+		"bin",
+		"cli",
+		"front-end",
+		"framework"
+	]
 }

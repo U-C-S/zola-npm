@@ -7,6 +7,6 @@
         "init": "zola-bin init --force"
 	},
 	"dependencies": {
-		"zola-bin": "0.1.0"
+		"zola-bin": "0.2.0"
 	}
 }

@@ -1,4 +1,4 @@
-import { execSync } from "zola-bin";
+import { execZola } from "zola-bin";
 
 let args = ["serve", "--open"];
-execSync(args);
+execZola(args);
