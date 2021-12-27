@@ -23,7 +23,7 @@ This repository provides the zola binary wrapper and the create-zola-site script
 With NPM installed, you can quickly setup a new _Zola_ site with the following command:
 
 ```bash
-npx create-zola-site {NAME}
+npx create-zola-site -n {NAME}
 ```
 
 This will create a new directory `{NAME}` and initializes the necessary files in it. Note that the site created using this process depends on Node.js, so you might see `package.json` and `node_modules` in the directory. This doesn't mean it any works different than actual template initialized by Zola. But This template will simplify the process of creating, building and deploying a new site.

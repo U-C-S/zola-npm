@@ -9,5 +9,5 @@ npm pack --pack-destination ../../tests/ZolaSiteTest
 cd ../../tests/ZolaSiteTest
 
 npm init -y
-npm install --prefer-offline --no-audit ./create-zola-site-*.tgz cowsay
-npx create-zola-site --force TheZolaSite
+npm install --prefer-offline --no-audit ./create-zola-site-*.tgz
+npx create-zola-site
