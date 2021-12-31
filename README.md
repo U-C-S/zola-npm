@@ -56,6 +56,10 @@ And then you can add the following script to your `package.json` file:
 
 - Why would I use this instead of the official one ?
 
-  - Because for few fellas who are so used to NPM ecosystem, this package makes it feel more like its a part of NPM ecosystem.
-  - Also, It's bit easier to deploy the sites since Node.js and NPM are accepted by most of the hosting services.
-  - Easier installation and usage.
+  - Because for few who are used to NPM, this package makes it feel more like its a part of NPM ecosystem.
+  - Easyily deploy the sites since Node.js and NPM are accepted by most of the hosting services.
+  - Simple installation and usage.
+
+- Any limitations ?
+
+  - Node.js overhead which might be add few seconds to the cold start.

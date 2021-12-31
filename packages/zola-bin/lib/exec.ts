@@ -12,5 +12,9 @@ import { getZolaPath } from "./path.js";
  * @param args as a array of strings
  */
 export function execZola(args: string[]) {
-	execFileSync(getZolaPath(), args, { stdio: "inherit" });
+	try {
+		execFileSync(getZolaPath(), args, { stdio: "inherit" });
+	} catch (error: any) {
+		console.error(error.message);
+	}
 }
