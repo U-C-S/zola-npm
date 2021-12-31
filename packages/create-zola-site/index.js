@@ -40,6 +40,24 @@ mkdir(PROJECT_NAME).then(() => {
 
 const thisPackageJson = JSON.parse(await readFile(new URL("./package.json", import.meta.url)));
 
+const configToml = `
+# For configuration options, see: https://www.getzola.org/documentation/getting-started/configuration/
+
+title = "${PROJECT_NAME}"
+
+# You might want to change this to your own domain
+base_url = "/"
+
+description = "${PROJECT_NAME}, made with Zola"
+
+compile_sass = true
+`;
+
+const gitIgnore = `
+public/
+node_modules/
+`;
+
 const packageJson = {
 	name: PROJECT_NAME.toLowerCase(),
 	private: true,
@@ -52,18 +70,13 @@ const packageJson = {
 	},
 };
 
-const configToml = `
-# For configuration options, see: https://www.getzola.org/documentation/getting-started/configuration/
+["content", "sass", "static", "templates", "themes"].forEach((dir) => {
+	mkdir(`${PROJECT_NAME}/${dir}`);
+});
 
-title = "${PROJECT_NAME}"
-base_url = "/"
-description = "${PROJECT_NAME}, made with Zola"
+writeFile(`${PROJECT_NAME}/config.toml`, configToml);
 
-theme = ""
-compile_sass = true
-`;
-
-writeFile(`./${PROJECT_NAME}/config.toml`, configToml);
+writeFile(`${PROJECT_NAME}/.gitignore`, gitIgnore);
 
 writeFile(`${PROJECT_NAME}/package.json`, JSON.stringify(packageJson, null, 2)).then(() => {
 	console.log();
