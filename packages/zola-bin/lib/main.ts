@@ -1,4 +1,4 @@
-import { execZola } from "./exec.js";
+import { execZola, zola } from "./exec.js";
 
-//export default exec;
 export { execZola };
+export default zola;

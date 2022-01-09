@@ -1,3 +1,7 @@
+## 0.3 (UNRELEASED)
+
+- add build, serve, check, init methods as a wrapper for `execZola`
+
 ### 0.2.1 (2021-12-31)
 
 - Error handling for zola binary file calls
