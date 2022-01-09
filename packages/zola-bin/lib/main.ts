@@ -1,4 +1,5 @@
 import { execZola, zola } from "./exec.js";
+import { getZolaPath } from "./path.js";
 
-export { execZola };
+export { execZola, getZolaPath };
 export default zola;

@@ -1,6 +1,6 @@
 {
 	"name": "zola-bin",
-	"version": "0.2.1",
+	"version": "0.3.0",
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Zola, A Static Site Generator, as a NPM Package",
@@ -23,6 +23,9 @@
 	"scripts": {
 		"build": "tsc",
 		"prepare": "tsc"
+	},
+	"dependencies": {
+		"dotenv": "10.0.0"
 	},
 	"optionalDependencies": {
 		"zola-bin-darwin": "latest",
