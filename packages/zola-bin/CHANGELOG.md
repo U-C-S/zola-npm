@@ -1,6 +1,7 @@
-## 0.3 (UNRELEASED)
+## 0.3 (2022-01-09)
 
-- add build, serve, check, init methods as a wrapper for `execZola`
+- support for env variable ZOLA_BIN_PATH
+- add easy to use methods - build, serve, check, init
 
 ### 0.2.1 (2021-12-31)
 
@@ -15,7 +16,7 @@
 
 - Update `zola-bin-*` packages to respective zola version (currently 0.15.2)
 - Add async and synchronous versions of `exec` function in `zola-bin` library
-- Migrate `lib` code to Typescript
+- Migrate `lib` code to Typescript (which provides types for export automatically)
 
 ### 0.0.7 (2021-11-26)
 

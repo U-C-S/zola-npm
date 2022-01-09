@@ -41,11 +41,45 @@ In your project's `package.json` file, call it inside a script using `zola-bin [
 }
 ```
 
+---
+
 ### JavaScript API
 
-```js
-import { execZola } from "zola-bin";
+Note: Only supports ESM
 
-let args = ["serve", "--open"];
-execZola(args);
+```typescript
+import { execZola, zola, getZolaPath } from "zola-bin";
+
+execZola([....args]); // same as calling zola-bin [args] from command line
+```
+
+Following methods are just a wrapper around `execZola`.
+
+Check out for usage - https://www.getzola.org/documentation/getting-started/cli-usage
+
+```typescript
+zola.build(options?: {
+    base_url?: string;
+    output_dir?: string;
+    config_file?: string;
+}): void;
+
+zola.serve(options?: {
+    base_url?: string;
+    output_dir?: string;
+    config_file?: string;
+    port?: number;
+    interface?: string;
+    open?: boolean;
+}): void;
+
+zola.check(): void;
+
+zola.help(cmdHelp?: "build" | "serve" | "check" | "init"): void;
+
+zola.init(name?: string): void;
+```
+
+```ts
+getZolaPath(): string; // returns path to zola binary
 ```
