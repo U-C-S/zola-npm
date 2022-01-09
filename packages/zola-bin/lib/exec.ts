@@ -85,20 +85,17 @@ const zola = {
 	 * prints help as stdout
 	 */
 	help(cmdHelp?: "build" | "serve" | "check" | "init") {
-		return execZola([cmdHelp + "", "--help"]);
+		let args = cmdHelp ? [cmdHelp] : [];
+		return execZola([...args, "--help"]);
 	},
 
 	/**
 	 * https://www.getzola.org/documentation/getting-started/cli-usage/#init
 	 */
-	init(name?: string, force?: boolean) {
-		let forceArg = force ? "--force" : "";
+	init(name?: string) {
+		let args = name ? ["init", name] : ["init"];
 
-		if (name) {
-			return execZola(["init", name, forceArg]);
-		} else {
-			return execZola(["init", forceArg]);
-		}
+		return execZola(args);
 	},
 };
 
