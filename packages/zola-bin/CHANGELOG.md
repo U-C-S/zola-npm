@@ -1,4 +1,9 @@
-## 0.3 (2022-01-09)
+## 0.3.1 (2022-01-10)
+
+- minor logic fixes
+- updates to documentation
+
+## 0.3.0 (2022-01-09)
 
 - support for env variable ZOLA_BIN_PATH
 - add easy to use methods - build, serve, check, init

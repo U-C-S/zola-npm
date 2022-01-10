@@ -1,6 +1,6 @@
 {
 	"name": "zola-bin",
-	"version": "0.3.0",
+	"version": "0.3.1",
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Zola, A Static Site Generator, as a NPM Package",

@@ -27,12 +27,16 @@ Add it as a dependency into your project or a new one, using....
 ```bash
 npm i zola-bin
 ```
+or
+```bash
+npm i -g zola-bin
+```
 
-### From Scripts
+### From CLI
 
-In your project's `package.json` file, call it inside a script using `zola-bin [args]`
+Format: `zola-bin [args]`
 
-`args` are same as official zola [CLI](https://www.getzola.org/documentation/getting-started/cli-usage/)
+`args` are same as official zola [CLI](https://www.getzola.org/documentation/getting-started/cli-usage/). Additionally, In your project's `package.json` file, you call it inside a script after adding it as a devDependency.
 
 ```json
 "scripts": {
@@ -48,7 +52,7 @@ In your project's `package.json` file, call it inside a script using `zola-bin [
 Note: Only supports ESM
 
 ```typescript
-import { execZola, zola, getZolaPath } from "zola-bin";
+import zola, { execZola, getZolaPath } from "zola-bin";
 
 execZola([....args]); // same as calling zola-bin [args] from command line
 ```

@@ -1,15 +1,11 @@
 import { execFileSync } from "child_process";
-// import { promisify } from "util";
 import { getZolaPath } from "./path.js";
-
-// https://nodejs.org/api/child_process.html#child_processexecfilefile-args-options-callback
-// const execPromise = promisify(execFile);
 
 /**
  * Synchronously calls zola binary file with the given arguments
  *
  * Reference: https://www.getzola.org/documentation/getting-started/cli-usage/
- * @param args as a array of strings
+ * @param args as a array of strings containing the arguments
  */
 function execZola(args: string[]) {
 	try {
@@ -31,9 +27,9 @@ interface serveOps extends buildOps {
 	open?: boolean;
 }
 
-function ArgsParse(options?: serveOps) {
-	const postArgs = [];
-	const preArgs = [];
+function buildArgsParse(options?: buildOps) {
+	let postArgs = [];
+	let preArgs = [];
 
 	if (options?.base_url) {
 		postArgs.push("--base-url", options.base_url);
@@ -44,25 +40,19 @@ function ArgsParse(options?: serveOps) {
 	if (options?.config_file) {
 		preArgs.push("--config", options.config_file);
 	}
-	if (options?.interface) {
-		postArgs.push("--interface", options.interface);
-	}
-	if (options?.port) {
-		postArgs.push("--port", options.port.toString());
-	}
-	if (options?.open) {
-		postArgs.push("--open");
-	}
 
 	return { preArgs, postArgs };
 }
 
+/**
+ * Provides methods as abstraction over directly calling zola commands
+ */
 const zola = {
 	/**
 	 * https://www.getzola.org/documentation/getting-started/cli-usage/#build
 	 */
 	build(options?: buildOps) {
-		const { preArgs, postArgs } = ArgsParse(options);
+		let { preArgs, postArgs } = buildArgsParse(options);
 		return execZola([...preArgs, "build", ...postArgs]);
 	},
 
@@ -70,7 +60,18 @@ const zola = {
 	 * https://www.getzola.org/documentation/getting-started/cli-usage/#serve
 	 */
 	serve(options?: serveOps) {
-		const { preArgs, postArgs } = ArgsParse(options);
+		let { preArgs, postArgs } = buildArgsParse(options);
+
+		if (options?.interface) {
+			postArgs.push("--interface", options.interface);
+		}
+		if (options?.port) {
+			postArgs.push("--port", options.port.toString());
+		}
+		if (options?.open) {
+			postArgs.push("--open");
+		}
+
 		return execZola([...preArgs, "serve", ...postArgs]);
 	},
 
@@ -94,7 +95,6 @@ const zola = {
 	 */
 	init(name?: string) {
 		let args = name ? ["init", name] : ["init"];
-
 		return execZola(args);
 	},
 };
