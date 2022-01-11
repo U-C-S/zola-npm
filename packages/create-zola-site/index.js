@@ -65,7 +65,7 @@ const packageJson = {
 		dev: "zola-bin serve --open",
 		build: "zola-bin build",
 	},
-	dependencies: {
+	devDependencies: {
 		"zola-bin": thisPackageJson.devDependencies["zola-bin"],
 	},
 };
@@ -83,6 +83,7 @@ writeFile(`${PROJECT_NAME}/package.json`, JSON.stringify(packageJson, null, 2)).
 	console.log("Created package.json");
 	console.log("Installing dependencies...");
 	execSync(`cd ${PROJECT_NAME} && npm install`);
+	console.log("All Done!");
 });
 
 /*

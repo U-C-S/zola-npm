@@ -1,4 +1,4 @@
-Quickly initialize a new Zola site.
+Quickly initialize a new Zola site. Depends on [zola-bin](https://www.npmjs.com/package/zola-bin).
 
 ## Getting Started
 
@@ -28,7 +28,7 @@ And then you can add the following script to your `package.json` file:
 }
 ```
 
-Note that the site created using this process depends on Node.js, so you might see `package.json` and `node_modules` in the directory. This doesn't mean it any works different than actual template initialized by Zola. But This template will simplify the process of creating, building and deploying a new site.
+**Note**: The site created using this process depends on Node.js and [zola-bin](https://www.npmjs.com/package/zola-bin), unlike actual template initialized by Zola. But This template will simplify the process of creating, building and deploying a new site.
 
 ## What is Zola ?
 
