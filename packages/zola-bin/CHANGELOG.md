@@ -1,3 +1,8 @@
+## 0.3.2 (2022-01-12)
+
+- support node >v14 (prev, >v16)
+- (internal) seperate `zola` object from `lib\exec` to `lib\zola`
+
 ## 0.3.1 (2022-01-10)
 
 - minor logic fixes
