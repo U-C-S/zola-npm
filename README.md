@@ -32,7 +32,7 @@ if you already have a existing site, you can add the `zola-bin` NPM package to m
 
 ```bash
 npm init
-npm install zola-bin
+npm i -D zola-bin
 ```
 
 And then you can add the following script to your `package.json` file:
@@ -46,13 +46,10 @@ And then you can add the following script to your `package.json` file:
 
 ## FAQ
 
-- What is the difference between Zola and create-zola-site templates
+- What is the difference between Zola and create-zola-site template ?
 
-  - Nothing, pretty much the same. except the create-zola-site template makes it easier to build and deploy a new site.
-
-- How does this actually work ?
-
-  - Create-zola-site internally uses the official zola binaries taken from its github repo releases. The NPM package `zola-bin` is a wrapper around these binaries.
+  - Nothing, directory structure is pretty much the same and works the same.
+  - create-zola-site template creates extra files - `package.json` and `node_modules`, with `zola-bin` npm package as a devDependency, which is wrapper around zola binaries taken from zola official github repo releases.
 
 - Why would I use this instead of the official one ?
 
@@ -62,4 +59,4 @@ And then you can add the following script to your `package.json` file:
 
 - Any limitations ?
 
-  - Node.js overhead which might be add few seconds to the cold start.
+  - Node.js overhead which might be add 1-2 seconds to the cold start when starting a dev server.
