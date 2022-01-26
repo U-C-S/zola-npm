@@ -5,7 +5,8 @@ import { Octokit } from "@octokit/rest";
 import extract from "extract-zip";
 import tar from "tar";
 
-const ZOLA_VERSION = fs.readFileSync("./zola_version.txt", "utf8"); // TODO: support a env variable for zola version for CI/CD
+const ZOLA_VERSION = fs.readFileSync("./zola-version.txt", "utf8"); // TODO: support a env variable for zola version for CI/CD
+const downloadCacheDir = "./.cache/zola_bin";
 
 console.log(`Downloading Zola ${ZOLA_VERSION}...`);
 
@@ -34,7 +35,6 @@ function DownloadFile(fileURL, dest) {
 let api = await ZolaGithubReleasesAPI;
 let latestReleases = api.data.assets;
 
-let downloadCacheDir = "./.cache/zola_bin";
 fs.mkdirSync(downloadCacheDir, { recursive: true });
 
 latestReleases.forEach((r) => {
@@ -53,5 +53,7 @@ latestReleases.forEach((r) => {
 			fs.mkdirSync(extract_dest, { recursive: true });
 			tar.x({ C: extract_dest, file: destf });
 		}
+
+		console.log("Extracted " + r.name);
 	});
 });
