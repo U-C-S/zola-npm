@@ -1,9 +1,15 @@
-## 0.3.2 (2022-01-12)
+### 0.3.3 (2022-01-26)
+
+- Update zola to v0.15.3
+- Use specific versions of `zola-bin-*` in the package.json optionalDependencies, instead of `latest`
+- Update README.md
+
+### 0.3.2 (2022-01-12)
 
 - support node >v14 (prev, >v16)
 - (internal) seperate `zola` object from `lib\exec` to `lib\zola`
 
-## 0.3.1 (2022-01-10)
+### 0.3.1 (2022-01-10)
 
 - minor logic fixes
 - updates to documentation

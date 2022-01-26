@@ -1,6 +1,6 @@
 {
 	"name": "zola-bin",
-	"version": "0.3.2",
+	"version": "0.3.3",
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Zola, A Static Site Generator, as a NPM Package",
@@ -24,15 +24,15 @@
 		"prepare": "tsc"
 	},
 	"dependencies": {
-		"dotenv": "11.0.0"
+		"dotenv": "14.3.2"
 	},
 	"optionalDependencies": {
-		"zola-bin-darwin": "latest",
-		"zola-bin-linux": "latest",
-		"zola-bin-win32": "latest"
+		"zola-bin-darwin": "^0.15.3",
+		"zola-bin-linux": "^0.15.3",
+		"zola-bin-win32": "^0.15.3"
 	},
 	"devDependencies": {
-		"typescript": "^4.5.4"
+		"typescript": "^4.5.5"
 	},
 	"engines": {
 		"node": ">=14.0.0"

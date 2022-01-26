@@ -1,6 +1,7 @@
 # zola-bin
 
-[![npm](https://img.shields.io/npm/v/zola-bin?label=zola-bin)](https://www.npmjs.com/package/zola-bin)
+[![npm](https://img.shields.io/npm/v/zola-bin?label=zola-bin-package)](https://www.npmjs.com/package/zola-bin)
+[![npm](https://img.shields.io/npm/v/zola-bin-linux?label=npm-zola-version)](https://www.npmjs.com/package/zola-bin-linux)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/getzola/zola?label=zola-latest)](https://github.com/getzola/zola/releases)
 
 ## What is Zola ?
@@ -27,7 +28,9 @@ Add it as a dependency into your project or a new one, using....
 ```bash
 npm i zola-bin
 ```
+
 or
+
 ```bash
 npm i -g zola-bin
 ```
@@ -62,28 +65,48 @@ Following methods are just a wrapper around `execZola`.
 Check out for usage - https://www.getzola.org/documentation/getting-started/cli-usage
 
 ```typescript
-zola.build(options?: {
-    base_url?: string;
-    output_dir?: string;
-    config_file?: string;
-}): void;
+interface buildOps {
+	base_url?: string;
+	output_dir?: string;
+	config_file?: string;
+}
+interface serveOps extends buildOps {
+	open?: boolean;
+	port?: number;
+	interface?: string;
+}
 
-zola.serve(options?: {
-    base_url?: string;
-    output_dir?: string;
-    config_file?: string;
-    port?: number;
-    interface?: string;
-    open?: boolean;
-}): void;
+declare const zola: {
+	build(options?: buildOps): void;
 
-zola.check(): void;
+	serve(options?: serveOps): void;
 
-zola.help(cmdHelp?: "build" | "serve" | "check" | "init"): void;
+	check(): void;
 
-zola.init(name?: string): void;
+	help(cmdHelp?: "build" | "serve" | "check" | "init"): void;
+
+	init(name?: string): void;
+};
+
+export default zola;
 ```
 
 ```ts
 getZolaPath(): string; // returns path to zola binary
+```
+
+---
+
+### Environment Variables
+
+Supports adding a custom `zola` binary path. Create a `.env` file in your project root directory and add the following line:
+
+```toml
+ZOLA_BIN_PATH="./somePathToZolaFile"
+```
+
+or 
+
+```bash
+ZOLA_BIN_PATH="./somePathToZolaFile" zola-bin [args]
 ```
