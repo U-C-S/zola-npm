@@ -1,6 +1,6 @@
 {
 	"name": "create-zola-site",
-	"version": "0.1.3",
+	"version": "0.1.4",
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Create Zola-based websites with one command",
@@ -20,7 +20,7 @@
 		"yargs": "^17.5.1"
 	},
 	"devDependencies": {
-		"zola-bin": "^0.3.4"
+		"zola-bin": "^0.3.5"
 	},
 	"engines": {
 		"node": ">=14.0.0"
