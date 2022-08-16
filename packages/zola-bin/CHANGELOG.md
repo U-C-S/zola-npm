@@ -1,4 +1,7 @@
-### 0.3.4 (2022-08-16)
+### 0.3.5 (2022-08-16)
+- Fix the Github Action publishing zola-bin platform deps without bin file
+
+### 0.3.4 (2022-08-16) (YANKED)
 - Update zola to v0.16.1 (#2)
 
 ### 0.3.3 (2022-01-26)
