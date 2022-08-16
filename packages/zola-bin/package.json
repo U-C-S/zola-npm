@@ -27,9 +27,9 @@
 		"dotenv": "14.3.2"
 	},
 	"optionalDependencies": {
-		"zola-bin-darwin": "^0.15.3",
-		"zola-bin-linux": "^0.15.3",
-		"zola-bin-win32": "^0.15.3"
+		"zola-bin-darwin": "^0.16.1",
+		"zola-bin-linux": "^0.16.1",
+		"zola-bin-win32": "^0.16.1"
 	},
 	"devDependencies": {
 		"typescript": "^4.5.5"
