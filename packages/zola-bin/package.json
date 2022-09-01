@@ -24,7 +24,7 @@
 		"prepare": "tsc"
 	},
 	"dependencies": {
-		"dotenv": "16.0.1"
+		"dotenv": "16.0.2"
 	},
 	"optionalDependencies": {
 		"zola-bin-darwin": "^0.16.2",
