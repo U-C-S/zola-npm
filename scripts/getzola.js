@@ -5,7 +5,7 @@ import { Octokit } from "@octokit/rest";
 import extract from "extract-zip";
 import tar from "tar";
 
-const ZOLA_VERSION = fs.readFileSync("./zola-version.txt", "utf8"); // TODO: support a env variable for zola version for CI/CD
+const ZOLA_VERSION = process.env.ZOLA_VERSION ? process.env.ZOLA_VERSION : fs.readFileSync("./zola-version.txt", "utf8");
 const downloadCacheDir = "./.cache/zola_bin";
 
 console.log(`Downloading Zola ${ZOLA_VERSION}...`);
