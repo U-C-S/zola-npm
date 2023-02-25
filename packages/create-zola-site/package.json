@@ -20,7 +20,7 @@
 		"yargs": "^17.6.2"
 	},
 	"devDependencies": {
-		"zola-bin": "^0.3.5"
+		"zola-bin": "^0.3.6"
 	},
 	"engines": {
 		"node": ">=14.0.0"
