@@ -1,6 +1,6 @@
 {
 	"name": "create-zola-site",
-	"version": "0.1.4",
+	"version": "0.1.5",
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Create Zola-based websites with one command",
