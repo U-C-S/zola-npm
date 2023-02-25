@@ -18,6 +18,17 @@ npm pack --pack-destination ../../tests/ZolaTest
 cd ../../tests/ZolaTest
 
 npm init -y
-npm install --prefer-offline --no-audit ./zola-bin-*.tgz ./zola-bin-win32-*.tgz ./zola-bin-darwin-*.tgz ./zola-bin-linux-*.tgz cowsay
+
+if [[ "$OSTYPE" == "linux-gnu"* ]]; then
+  npm install --prefer-offline --no-audit ./zola-bin-linux-*.tgz
+elif [[ "$OSTYPE" == "darwin"* ]]; then
+  npm install --prefer-offline --no-audit ./zola-bin-darwin-*.tgz
+elif [[ "$OSTYPE" == "msys" ]]; then
+  npm install --prefer-offline --no-audit ./zola-bin-win32-*.tgz
+elif [[ "$OSTYPE" == "win32" ]]; then
+  npm install --prefer-offline --no-audit ./zola-bin-win32-*.tgz
+fi
+
+npm install --prefer-offline --no-audit cowsay ./zola-bin-0.*.tgz 
 npm exec -c 'cowsay Zola'
 npm exec -c 'zola-bin --version'
