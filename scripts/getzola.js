@@ -16,46 +16,24 @@ let ZolaGithubReleasesAPI = new Octokit().repos.getReleaseByTag({
 	tag: ZOLA_VERSION,
 });
 
-/**
- *
- * @param {string} name
- * @param {string} fileURL
- * @param {fs.WriteStream} dest
- */
-function DownloadFile(name, fileURL, dest) {
-	const destf = path.join(downloadCacheDir, name);
-
+function DownloadFile(fileURL, dest) {
 	return new Promise((resolve, reject) => {
-		https.get(fileURL, (res1) => {
-			https.get(res1.headers.location, (res2) => {
-				res2.pipe(dest);
-				res2.on("error", reject);
-				res2.on("end", () => {
-					console.log("- Downloaded " + name);
-
-					if (name.includes("windows")) {
-						let extract_dest = "./packages/zola-bin-win32/";
-						extract(destf, { dir: path.resolve(extract_dest) });
-					} else {
-						let platform = name.includes("linux") ? "linux" : "darwin";
-						let extract_dest = "./packages/zola-bin-" + platform + "/bin";
-						fs.mkdirSync(extract_dest, { recursive: true });
-						tar.x({ C: extract_dest, file: destf });
-					}
-
-					console.log("-- Extracted " + name);
-
-					return resolve();
-				});
-			});
-		});
+		https
+			.get(fileURL, (res1) => {
+				https
+					.get(res1.headers.location, (res2) => {
+						res2.pipe(dest);
+						res2.on("error", reject);
+						res2.on("end", resolve);
+					})
+					.on("error", reject);
+			})
+			.on("error", reject);
 	});
 }
 
 let api = await ZolaGithubReleasesAPI;
 let latestReleases = api.data.assets;
-
-let promiseStore = [];
 
 fs.mkdirSync(downloadCacheDir, { recursive: true });
 
@@ -63,10 +41,19 @@ latestReleases.forEach((r) => {
 	const destf = path.join(downloadCacheDir, r.name);
 	const download_dest = fs.createWriteStream(destf);
 
-	promiseStore.push(DownloadFile(r.name, r.browser_download_url, download_dest));
-});
+	DownloadFile(r.browser_download_url, download_dest).then(() => {
+		console.log("Downloaded " + r.name);
 
-Promise.all(promiseStore).then(() => {
-	console.log("Downloaded all Zola binaries");
-	process.exit();
+		if (r.name.includes("windows")) {
+			let extract_dest = "./packages/zola-bin-win32/";
+			extract(destf, { dir: path.resolve(extract_dest) });
+		} else {
+			let platform = r.name.includes("linux") ? "linux" : "darwin";
+			let extract_dest = "./packages/zola-bin-" + platform + "/bin";
+			fs.mkdirSync(extract_dest, { recursive: true });
+			tar.x({ C: extract_dest, file: destf });
+		}
+
+		console.log("Extracted " + r.name);
+	});
 });
