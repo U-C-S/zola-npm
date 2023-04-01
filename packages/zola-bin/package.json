@@ -28,8 +28,8 @@
 	},
 	"optionalDependencies": {
 		"zola-bin-darwin": "^0.17.2",
-		"zola-bin-linux": "^0.17.2",
-		"zola-bin-win32": "^0.17.2"
+		"zola-bin-linux": "^0.17.4",
+		"zola-bin-win32": "^0.17.3"
 	},
 	"devDependencies": {
 		"typescript": "^4.9.5"
