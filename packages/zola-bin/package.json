@@ -32,7 +32,7 @@
 		"zola-bin-win32": "^0.17.3"
 	},
 	"devDependencies": {
-		"typescript": "^4.9.5"
+		"typescript": "^5.0.3"
 	},
 	"engines": {
 		"node": ">=14.0.0"
