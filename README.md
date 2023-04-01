@@ -1,4 +1,4 @@
-# Welcome to Zola-Tools Repository
+# zola-npm
 
 This repository hosts the source code for following NPM packages
 

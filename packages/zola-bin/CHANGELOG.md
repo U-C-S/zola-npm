@@ -1,3 +1,11 @@
+### 0.3.7 (2023-04-02)
+- Update zola version to v0.17.2
+
+### 0.3.6 (2023-02-25)
+- Update zola version to v0.17.1 (no v0.17.0)
+- Support env variables in script update zola to next version by @kogeletey in #20
+- Other minor fixes/updates with scripts in tests, getzola.js
+
 ### 0.3.5 (2022-08-16)
 - Fix the Github Action publishing zola-bin platform deps without bin file
 

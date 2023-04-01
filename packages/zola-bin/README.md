@@ -1,8 +1,8 @@
 # zola-bin
 
-[![npm](https://img.shields.io/npm/v/zola-bin?label=zola-bin-package)](https://www.npmjs.com/package/zola-bin)
+[![npm](https://img.shields.io/npm/v/zola-bin?label=zola-bin)](https://www.npmjs.com/package/zola-bin)
 [![npm](https://img.shields.io/npm/v/zola-bin-linux?label=npm-zola-version)](https://www.npmjs.com/package/zola-bin-linux)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/getzola/zola?label=zola-latest)](https://github.com/getzola/zola/releases)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/getzola/zola?label=zola-official-latest)](https://github.com/getzola/zola/releases)
 
 ## What is Zola ?
 
