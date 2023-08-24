@@ -1,0 +1,3 @@
+[submodule "packages/zola"]
+	path = packages/zola
+	url = https://github.com/U-C-S/zola.git
