@@ -1,29 +1,55 @@
 {
-	"name": "zola-tooling-project",
-	"version": "0.1.0",
-	"private": true,
-	"type": "module",
-	"workspaces": [
-		"packages/create-zola-site",
-		"packages/zola-bin"
-	],
-	"scripts": {
-		"get_Zola": "node ./scripts/getzola.js",
-		"Test_npm_install": "sh ./tests/test_install.sh",
-		"Test_CZS": "sh ./tests/test_czs.sh"
+	"name": "zola-bin",
+	"version": "0.4.0",
+	"author": "U-C-S",
+	"license": "MIT",
+	"description": "Zola, A Static Site Generator, as a NPM Package",
+	"homepage": "https://github.com/U-C-S/zola-tools",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/U-C-S/zola-tools"
 	},
-	"dependencies": {
-		"@octokit/rest": "^19.0.7",
-		"extract-zip": "^2.0.1",
-		"tar": "^6.1.13"
+	"type": "module",
+	"napi": {
+		"name": "zola-bin"
+	},
+	"scripts": {
+		"Test_npm_install": "sh ./tests/test_install.sh",
+		"Test_CZS": "sh ./tests/test_czs.sh",
+		"artifacts": "napi artifacts",
+		"build": "napi build --platform --release",
+		"build:debug": "napi build --platform",
+		"prepublishOnly": "napi prepublish -t npm",
+		"universal": "napi universal",
+		"build:alpha": "napi build --platform --cargo-cwd \"zola\""
 	},
 	"devDependencies": {
-		"@types/node": "^18.14.1"
+		"@napi-rs/cli": "^2.16.3",
+		"@types/node": "^20.5.6",
+		"smol-toml": "^1.1.2"
+	},
+	"engines": {
+		"node": ">= 16"
 	},
 	"prettier": {
 		"trailingComma": "es5",
 		"tabWidth": 2,
 		"useTabs": true,
 		"printWidth": 110
-	}
+	},
+	"keywords": [
+		"zola",
+		"tera",
+		"static-site-generator",
+		"ssg",
+		"markdown",
+		"rust",
+		"html",
+		"scss",
+		"sass",
+		"bin",
+		"cli",
+		"front-end",
+		"framework"
+	]
 }
