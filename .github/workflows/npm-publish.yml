@@ -32,16 +32,15 @@ jobs:
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
-            build: |-
-              set -e &&
-              npm run build --target x86_64-unknown-linux-gnu &&
-              strip *.node
+            build: npm run build --target x86_64-unknown-linux-gnu
     name: ${{ matrix.settings.target }} - node@18
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v3
       - name: Initialize and update submodules
-        run: git submodule update --init --recursive
+        run: |
+          git config --global core.protectNTFS false
+          git submodule update --init --recursive
       - name: Setup node
         uses: actions/setup-node@v3
         if: ${{ !matrix.settings.docker }}
