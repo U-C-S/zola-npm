@@ -7,3 +7,7 @@ tests/ZolaSiteTest
 zola.exe
 /packages/zola-bin-darwin/bin/zola
 /packages/zola-bin-linux/bin/zola
+
+dump
+target
+*.node
