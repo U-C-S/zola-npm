@@ -1,3 +1,3 @@
-# `zola-bin-darwin-x64`
+This package is a part of [zola-bin](https://www.npmjs.com/package/zola-bin)
 
-This is the **x86_64-apple-darwin** binary for `zola-bin`
+Contains the `zola` binary file which is acts as Node-API add-on file

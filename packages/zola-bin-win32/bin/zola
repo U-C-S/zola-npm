@@ -1,8 +1,0 @@
-#!/usr/bin/env node
-
-import child_process from "child_process";
-
-const zola_exe = require.resolve("zola-bin-win32/zola.exe");
-child_process.spawnSync(zola_exe, process.argv.slice(2), {
-  stdio: "inherit",
-});

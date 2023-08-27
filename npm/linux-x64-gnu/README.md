@@ -1,3 +1,3 @@
-# `zola-bin-linux-x64-gnu`
+This package is a part of [zola-bin](https://www.npmjs.com/package/zola-bin)
 
-This is the **x86_64-unknown-linux-gnu** binary for `zola-bin`
+Contains the `zola` binary file which is acts as Node-API add-on file
