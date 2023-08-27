@@ -1,8 +1,4 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
-# For more information see: https://help.github.com/actions/language-and-framework-guides/publishing-nodejs-packages
-
 name: zola-bin publish pipeline
-
 env:
   DEBUG: napi:*
   APP_NAME: zola-bin
@@ -10,11 +6,9 @@ env:
 permissions:
   contents: write
   id-token: write
-
-on:
+"on":
   release:
     types: [created]
-
 jobs:
   build:
     strategy:
@@ -60,10 +54,8 @@ jobs:
           path: |
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
-            ~/.cargo/git/db/
-            .cargo-cache
-            target/
-          key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
+            zola/target/
+          key: ${{ matrix.settings.target }}-cargo-cache
       - name: Install npm dependencies
         run: npm install
       - name: Build in docker
@@ -77,11 +69,16 @@ jobs:
         run: ${{ matrix.settings.build }}
         if: ${{ !matrix.settings.docker }}
         shell: bash
+      - name: Build
+        run: |
+          sudo apt-get install tree
+          tree -I "target|sublime|node_modules|test*|docs"
+        shell: bash
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: ${{ env.APP_NAME }}.*.node
+          path: "*.node"
           if-no-files-found: error
   publish:
     name: Publish
