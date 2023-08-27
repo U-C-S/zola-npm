@@ -69,16 +69,11 @@ jobs:
         run: ${{ matrix.settings.build }}
         if: ${{ !matrix.settings.docker }}
         shell: bash
-      - name: Build
-        run: |
-          sudo apt-get install tree
-          tree -I "target|sublime|node_modules|test*|docs"
-        shell: bash
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: "*.node"
+          path: "**/*.node"
           if-no-files-found: error
   publish:
     name: Publish
