@@ -4,12 +4,11 @@
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Zola, A Static Site Generator, as a NPM Package",
-	"homepage": "https://github.com/U-C-S/zola-tools",
+	"homepage": "https://github.com/U-C-S/zola-npm",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/U-C-S/zola-tools"
+		"url": "https://github.com/U-C-S/zola-npm"
 	},
-	"type": "module",
 	"napi": {
 		"name": "zola-bin"
 	},
@@ -37,6 +36,11 @@
 		"useTabs": true,
 		"printWidth": 110
 	},
+	"files": [
+		"index.js",
+		"index.d.ts",
+		"CHANGELOG.md"
+	],
 	"keywords": [
 		"zola",
 		"tera",
