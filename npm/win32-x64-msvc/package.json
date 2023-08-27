@@ -1,0 +1,18 @@
+{
+  "name": "zola-bin-win32",
+  "version": "0.4.0",
+  "os": [
+    "win32"
+  ],
+  "cpu": [
+    "x64"
+  ],
+  "main": "zola-bin.win32-x64-msvc.node",
+  "files": [
+    "zola-bin.win32-x64-msvc.node"
+  ],
+  "license": "MIT",
+  "engines": {
+    "node": ">= 16"
+  }
+}

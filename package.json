@@ -17,11 +17,10 @@
 		"Test_npm_install": "sh ./tests/test_install.sh",
 		"Test_CZS": "sh ./tests/test_czs.sh",
 		"artifacts": "napi artifacts",
-		"build": "napi build --platform --release",
-		"build:debug": "napi build --platform",
+		"build": "node setup.js && napi build --platform --release --cargo-cwd \"zola\"",
+		"build:debug": "node setup.js && napi build --platform --cargo-cwd \"zola\"",
 		"prepublishOnly": "napi prepublish -t npm",
-		"universal": "napi universal",
-		"build:alpha": "napi build --platform --cargo-cwd \"zola\""
+		"universal": "napi universal"
 	},
 	"devDependencies": {
 		"@napi-rs/cli": "^2.16.3",
@@ -51,5 +50,10 @@
 		"cli",
 		"front-end",
 		"framework"
-	]
+	],
+	"optionalDependencies": {
+		"zola-bin-win32-x64-msvc": "0.4.0",
+		"zola-bin-darwin-x64": "0.4.0",
+		"zola-bin-linux-x64-gnu": "0.4.0"
+	}
 }
