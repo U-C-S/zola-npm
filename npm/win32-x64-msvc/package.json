@@ -1,18 +1,23 @@
 {
-  "name": "zola-bin-win32",
-  "version": "0.4.0",
-  "os": [
-    "win32"
-  ],
-  "cpu": [
-    "x64"
-  ],
-  "main": "zola-bin.win32-x64-msvc.node",
-  "files": [
-    "zola-bin.win32-x64-msvc.node"
-  ],
-  "license": "MIT",
-  "engines": {
-    "node": ">= 16"
-  }
+	"name": "zola-bin-win32",
+	"version": "0.17.5",
+	"description": "The binary file of Zola",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/U-C-S/zola-tools"
+	},
+	"os": [
+		"win32"
+	],
+	"cpu": [
+		"x64"
+	],
+	"main": "zola-bin.win32-x64-msvc.node",
+	"files": [
+		"zola-bin.win32-x64-msvc.node"
+	],
+	"license": "MIT",
+	"engines": {
+		"node": ">= 16"
+	}
 }

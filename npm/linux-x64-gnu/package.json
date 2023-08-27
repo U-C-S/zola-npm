@@ -1,21 +1,26 @@
 {
-  "name": "zola-bin-linux",
-  "version": "0.4.0",
-  "os": [
-    "linux"
-  ],
-  "cpu": [
-    "x64"
-  ],
-  "main": "zola-bin.linux-x64-gnu.node",
-  "files": [
-    "zola-bin.linux-x64-gnu.node"
-  ],
-  "license": "MIT",
-  "engines": {
-    "node": ">= 16"
-  },
-  "libc": [
-    "glibc"
-  ]
+	"name": "zola-bin-linux",
+	"version": "0.17.5",
+	"description": "The binary file of Zola",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/U-C-S/zola-tools"
+	},
+	"os": [
+		"linux"
+	],
+	"cpu": [
+		"x64"
+	],
+	"main": "zola-bin.linux-x64-gnu.node",
+	"files": [
+		"zola-bin.linux-x64-gnu.node"
+	],
+	"license": "MIT",
+	"engines": {
+		"node": ">= 16"
+	},
+	"libc": [
+		"glibc"
+	]
 }
