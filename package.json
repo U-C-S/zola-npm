@@ -53,8 +53,8 @@
 		"framework"
 	],
 	"optionalDependencies": {
-		"zola-bin-win32": "0.17.5-preview.1",
 		"zola-bin-darwin": "0.17.5-preview.1",
-		"zola-bin-linux": "0.17.5-preview.1"
+		"zola-bin-linux": "0.17.5-preview.1",
+		"zola-bin-win32": "0.17.5-preview.1"
 	}
 }
