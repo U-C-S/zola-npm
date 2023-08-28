@@ -18,8 +18,8 @@
 		"Test_npm_install": "sh ./tests/test_install.sh",
 		"Test_CZS": "sh ./tests/test_czs.sh",
 		"artifacts": "napi artifacts",
-		"build": "node setup.js && napi build --platform --release --cargo-cwd \"zola\"",
-		"build:debug": "node setup.js && napi build --platform --cargo-cwd \"zola\"",
+		"build": "node setup.mjs && napi build --platform --release --cargo-cwd \"zola\"",
+		"build:debug": "node setup.mjs && napi build --platform --cargo-cwd \"zola\"",
 		"universal": "napi universal"
 	},
 	"devDependencies": {
@@ -60,5 +60,9 @@
 		"zola-bin-darwin": "0.17.5-preview.1",
 		"zola-bin-linux": "0.17.5-preview.1",
 		"zola-bin-win32": "0.17.5-preview.1"
-	}
+	},
+	"workspaces": [
+		"npm/*",
+		"."
+	]
 }

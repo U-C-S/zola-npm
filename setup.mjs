@@ -20,3 +20,4 @@ zolaTomlParsed["dependencies"]["napi-derive"] = "2.13.0";
 
 let newZolaToml = stringify(zolaTomlParsed);
 writeFile("zola/Cargo.toml", newZolaToml, { encoding: "utf8" });
+console.log("Modified the Zola's git submodule directory files.");

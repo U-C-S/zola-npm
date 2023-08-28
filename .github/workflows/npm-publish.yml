@@ -6,9 +6,7 @@ env:
 permissions:
   contents: write
   id-token: write
-"on":
-  release:
-    types: [created]
+on: push # TODO: change to releases
 jobs:
   build:
     strategy:
@@ -103,7 +101,7 @@ jobs:
         run: |
           npm config set provenance true
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          npm publish --tag next --access public
+          npm publish --workspaces --tag next --access public
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.npm_token }}
