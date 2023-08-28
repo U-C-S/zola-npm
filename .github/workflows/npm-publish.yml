@@ -101,7 +101,10 @@ jobs:
         run: |
           npm config set provenance true
           echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          npm publish --workspaces --tag next --access public
+          npm publish ./npm/darwin-x64 --tag next
+          npm publish ./npm/linux-x64-gnu --tag next
+          npm publish ./npm/win32-x64-msvc --tag next
+          npm publish --tag next
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_TOKEN: ${{ secrets.npm_token }}
