@@ -124,9 +124,10 @@ if (!nativeBinding) {
 	throw new Error(`Failed to load native binding`);
 }
 
-const { zolaBuild, zolaInit, zolaCheck, zolaServe } = nativeBinding;
+const { zolaBuild, zolaInit, zolaCheck, zolaServe, zolaCommandParse } = nativeBinding;
 
 module.exports.zolaBuild = zolaBuild;
 module.exports.zolaInit = zolaInit;
 module.exports.zolaCheck = zolaCheck;
 module.exports.zolaServe = zolaServe;
+module.exports.zolaCommandParse = zolaCommandParse;
