@@ -18,8 +18,8 @@
 		"Test_npm_install": "sh ./tests/test_install.sh",
 		"Test_CZS": "sh ./tests/test_czs.sh",
 		"artifacts": "napi artifacts",
-		"build": "node setup.mjs && napi build --platform --release --cargo-cwd \"zola\"",
-		"build:debug": "node setup.mjs && napi build --platform --cargo-cwd \"zola\"",
+		"build": "node setup.mjs && napi build --platform --release --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js",
+		"build:debug": "node setup.mjs && napi build --platform --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js",
 		"universal": "napi universal"
 	},
 	"devDependencies": {
