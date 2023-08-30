@@ -2,4 +2,4 @@
 
 import execZola from "../dist/exec.js";
 
-execZola(process.argv.slice(2));
+execZola(process.argv.slice(1));

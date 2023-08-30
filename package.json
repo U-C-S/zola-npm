@@ -9,26 +9,38 @@
 		"type": "git",
 		"url": "https://github.com/U-C-S/zola-npm"
 	},
-	"napi": {
-		"name": "zola-bin"
-	},
-	"main": "index.js",
-	"types": "index.d.ts",
+	"type": "module",
+	"bin": "bin/zola.js",
+	"main": "dist/main.js",
+	"types": "types/main.d.ts",
+	"files": [
+		"bin",
+		"dist",
+		"types",
+		"bindings.js",
+		"bindings.d.ts",
+		"CHANGELOG.md"
+	],
 	"scripts": {
-		"Test_npm_install": "sh ./tests/test_install.sh",
-		"Test_CZS": "sh ./tests/test_czs.sh",
 		"artifacts": "napi artifacts",
 		"build": "node setup.mjs && napi build --platform --release --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js",
 		"build:debug": "node setup.mjs && napi build --platform --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js",
-		"universal": "napi universal"
+		"universal": "napi universal",
+		"prepare": "tsc",
+		"Test_npm_install": "sh ./tests/test_install.sh",
+		"Test_CZS": "sh ./tests/test_czs.sh"
 	},
 	"devDependencies": {
 		"@napi-rs/cli": "^2.16.3",
 		"@types/node": "^20.5.6",
-		"smol-toml": "^1.1.2"
+		"smol-toml": "^1.1.2",
+		"typescript": "^5.2.2"
 	},
 	"engines": {
 		"node": ">= 16"
+	},
+	"napi": {
+		"name": "zola-bin"
 	},
 	"prettier": {
 		"trailingComma": "es5",
@@ -36,11 +48,6 @@
 		"useTabs": true,
 		"printWidth": 110
 	},
-	"files": [
-		"index.js",
-		"index.d.ts",
-		"CHANGELOG.md"
-	],
 	"keywords": [
 		"zola",
 		"tera",

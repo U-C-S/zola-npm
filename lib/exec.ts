@@ -1,5 +1,4 @@
-import { execFileSync } from "child_process";
-import { getZolaPath } from "./path.js";
+import { zolaCommandParse } from "../bindings.js";
 
 /**
  * Synchronously calls zola binary file with the given arguments
@@ -9,7 +8,8 @@ import { getZolaPath } from "./path.js";
  */
 function execZola(args: string[]) {
 	try {
-		execFileSync(getZolaPath(), args, { stdio: "inherit" });
+		zolaCommandParse(args)
+		// execFileSync(getZolaPath(), args, { stdio: "inherit" });
 	} catch (error: any) {
 		console.error(error.message);
 	}

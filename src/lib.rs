@@ -17,7 +17,7 @@ use time::UtcOffset;
 use utils::net::{get_available_port, port_is_available};
 
 #[napi]
-pub fn zola_build(
+pub fn raw_zola_build(
     root_dir: String,
     config_file: String,
     base_url: Option<String>,
@@ -36,12 +36,12 @@ pub fn zola_build(
 }
 
 #[napi]
-pub fn zola_init(name: String, force: bool) {
+pub fn raw_zola_init(name: String, force: bool) {
     let _ = create_new_project(name.as_str(), force);
 }
 
 #[napi]
-pub fn zola_check(
+pub fn raw_zola_check(
     root_dir: String,
     config_file: String,
     base_path: Option<String>,
@@ -58,7 +58,7 @@ pub fn zola_check(
 }
 
 #[napi]
-pub fn zola_serve(
+pub fn raw_zola_serve(
     root_dir: String,           //&Path,
     interface: String,          //&str,
     interface_port: u32,        //u16,

@@ -6,7 +6,7 @@ tests/ZolaSiteTest
 dump
 target
 
+dist
+types/
 
-
-
-
+.cargo
