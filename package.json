@@ -9,7 +9,6 @@
 		"type": "git",
 		"url": "https://github.com/U-C-S/zola-npm"
 	},
-	"type": "module",
 	"bin": "bin/zola.js",
 	"main": "dist/main.js",
 	"types": "types/main.d.ts",
