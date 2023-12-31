@@ -9,14 +9,14 @@ const zolaTomlParsed = parse(zolaToml);
 
 zolaTomlParsed["lib"] = {};
 zolaTomlParsed["lib"]["crate-type"] = ["cdylib"];
-zolaTomlParsed["build-dependencies"]["napi-build"] = "2.0.1";
+zolaTomlParsed["build-dependencies"]["napi-build"] = "2.1.0";
 zolaTomlParsed["dependencies"]["napi"] = {
-	version: "2.13.3",
+	version: "2.14.1",
 	"default-features": false,
 	features: ["napi8"],
 };
 
-zolaTomlParsed["dependencies"]["napi-derive"] = "2.13.0";
+zolaTomlParsed["dependencies"]["napi-derive"] = "2.14.4";
 
 let newZolaToml = stringify(zolaTomlParsed);
 writeFile("zola/Cargo.toml", newZolaToml, { encoding: "utf8" });
