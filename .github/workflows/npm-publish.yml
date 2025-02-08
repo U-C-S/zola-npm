@@ -12,7 +12,7 @@ permissions:
 jobs:
   build:
     strategy:
-      fail-fast: true
+      fail-fast: false
       matrix:
         settings:
           - host: windows-latest
@@ -20,7 +20,6 @@ jobs:
             target: x86_64-pc-windows-msvc
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
-            docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
             build: npm run build --target x86_64-unknown-linux-gnu
           - host: macos-latest-arm
             target: aarch64-apple-darwin
@@ -36,13 +35,11 @@ jobs:
           submodules: true
       - name: Setup node
         uses: actions/setup-node@v4
-        if: ${{ !matrix.settings.docker }}
         with:
           node-version: 20
           cache: "npm"
       - name: Install Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
-        if: ${{ !matrix.settings.docker }}
         with:
           toolchain: stable
           targets: ${{ matrix.settings.target }}
@@ -64,16 +61,8 @@ jobs:
         run: npm install
       - name: Setup zola as a library
         run: npm run setup
-      - name: Build in docker
-        uses: addnab/docker-run-action@v3
-        if: ${{ matrix.settings.docker }}
-        with:
-          image: ${{ matrix.settings.docker }}
-          options: "--user 0:0 -v ${{ github.workspace }}/.cargo-cache/git/db:/usr/local/cargo/git/db -v ${{ github.workspace }}/.cargo/registry/cache:/usr/local/cargo/registry/cache -v ${{ github.workspace }}/.cargo/registry/index:/usr/local/cargo/registry/index -v ${{ github.workspace }}:/build -w /build"
-          run: ${{ matrix.settings.build }}
       - name: Build
         run: ${{ matrix.settings.build }}
-        if: ${{ !matrix.settings.docker }}
         shell: bash
       - name: Upload artifact
         uses: actions/upload-artifact@v4
