@@ -7,7 +7,7 @@
 	"homepage": "https://github.com/U-C-S/zola-npm",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/U-C-S/zola-npm",
+		"url": "git+https://github.com/U-C-S/zola-npm.git",
 		"directory": "src/create-zola-site"
 	},
 	"type": "module",
@@ -20,7 +20,7 @@
 		"yargs": "^17.7.2"
 	},
 	"devDependencies": {
-		"zola-bin": "^1.0.0-preview.1"
+		"zola-bin": "^1.0.0"
 	},
 	"engines": {
 		"node": ">=20.0.0"

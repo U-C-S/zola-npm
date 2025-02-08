@@ -21,7 +21,7 @@ This repository provides the zola binary wrapper and the create-zola-site script
 
 > Zola provides pre-built binaries for MacOS, Linux and Windows on its [GitHub release page](https://github.com/getzola/zola/releases).
 
-This package can be used for calling the pre-built `Zola` binary through [Node](https://nodejs.org), making it a part of node's vast NPM ecosystem. This package is a cross-platform, easy to install and integrate with other NPM packages. Also, This package gets the binaries directly from Zola Releases Page.
+This package can be used for calling the pre-built `Zola` binary through [Node](https://nodejs.org), making it a part of node's vast NPM ecosystem. This package is a cross-platform, easy to install and integrate with other NPM packages. It uses the source code of Zola, to get native bindings and call them through [Node-API](https://nodejs.org/api/n-api.html).
 
 ## Usage
 
@@ -54,8 +54,6 @@ Format: `zola-bin [args]`
 
 ### JavaScript API
 
-Note: Only supports ESM
-
 ```typescript
 import zola, { execZola, getZolaPath } from "zola-bin";
 
@@ -85,32 +83,10 @@ declare const zola: {
 
 	check(): void;
 
-	help(cmdHelp?: "build" | "serve" | "check" | "init"): void;
-
 	init(name?: string): void;
 };
 
 export default zola;
-```
-
-```ts
-getZolaPath(): string; // returns path to zola binary
-```
-
----
-
-### Environment Variables
-
-Supports adding a custom `zola` binary path. Create a `.env` file in your project root directory and add the following line:
-
-```toml
-ZOLA_BIN_PATH="./somePathToZolaFile"
-```
-
-or
-
-```bash
-ZOLA_BIN_PATH="./somePathToZolaFile" zola-bin [args]
 ```
 
 ## Getting Started with Create Zola Site
@@ -144,14 +120,10 @@ And then you can add the following script to your `package.json` file:
 - What is the difference between Zola and create-zola-site template ?
 
   - Nothing, directory structure is pretty much the same and works the same.
-  - create-zola-site template creates extra files - `package.json` and `node_modules`, with `zola-bin` npm package as a devDependency, which is wrapper around zola binaries taken from zola official github repo releases.
+  - create-zola-site template creates extra files - `package.json` and `node_modules`, with `zola-bin` npm package as a devDependency, which builds bindings from the source code and exposes them as node.js function calls.
 
 - Why would I use this instead of the official one ?
 
   - Because for few who are used to NPM, this package makes it feel more like its a part of NPM ecosystem.
   - Easyily deploy the sites since Node.js and NPM are accepted by most of the hosting services.
   - Simple installation and usage.
-
-- Any limitations ?
-
-  - Node.js overhead which might be add few seconds to the cold start when starting a dev server.

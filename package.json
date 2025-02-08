@@ -1,6 +1,6 @@
 {
 	"name": "zola-bin",
-	"version": "1.0.0-preview.10",
+	"version": "1.0.0",
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Zola, A Static Site Generator, as a NPM Package",
@@ -82,9 +82,9 @@
 		"url": "https://github.com/U-C-S/zola-npm/issues"
 	},
 	"optionalDependencies": {
-		"@u-c-s/zola-darwin-x64": "0.19.2-preview.10",
-		"@u-c-s/zola-darwin-arm64": "0.19.2-preview.10",
-		"@u-c-s/zola-linux-x64-gnu": "0.19.2-preview.10",
-		"@u-c-s/zola-win32-x64-msvc": "0.19.2-preview.10"
+		"@u-c-s/zola-darwin-x64": "0.19.2",
+		"@u-c-s/zola-darwin-arm64": "0.19.2",
+		"@u-c-s/zola-linux-x64-gnu": "0.19.2",
+		"@u-c-s/zola-win32-x64-msvc": "0.19.2"
 	}
 }

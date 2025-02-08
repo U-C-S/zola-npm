@@ -1,7 +1,8 @@
-## 1.0.0 (UNRELEASED)
+## 1.0.0 (2025-02-09)
 
 - Use Node-API and napi-rs to build native bindings for zola
 - Update CI to adapt to new build process
+- [BREAKING] Remove direct usage of zola binaries and `getZolaPath` fn
 
 ### 0.3.7 (2023-04-02)
 
