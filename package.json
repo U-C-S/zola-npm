@@ -78,11 +78,6 @@
 		"example": "examples",
 		"lib": "lib"
 	},
-	"workspaces": [
-		"npm/*",
-		"src/create-zola-site",
-		"./"
-	],
 	"bugs": {
 		"url": "https://github.com/U-C-S/zola-npm/issues"
 	},

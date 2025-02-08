@@ -10,7 +10,7 @@
 		"darwin"
 	],
 	"cpu": [
-		"x64"
+		"arm64"
 	],
 	"main": "zola-bin.darwin-arm64.node",
 	"files": [

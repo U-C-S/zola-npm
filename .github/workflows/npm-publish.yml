@@ -84,6 +84,8 @@ jobs:
   publish:
     name: Publish
     runs-on: ubuntu-latest
+    needs:
+      - build
     steps:
       - uses: actions/checkout@v4
       - name: Setup node
@@ -104,9 +106,25 @@ jobs:
       - name: List packages
         run: ls -R ./npm
         shell: bash
+      - run: npm publish ./npm/win32-x64-msvc --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - run: npm publish ./npm/linux-x64-gnu --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - run: npm publish ./npm/darwin-x64 --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+      - run: npm publish ./npm/darwin-arm64 --provenance --access public
+        env:
+          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
       - name: Publish zola-bin
         run: |
           npm config set provenance true
-          npm publish --workspaces
+          npm publish
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - name: Publish create-zola-site
+        run: npm publish ./src/create-zola-site --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

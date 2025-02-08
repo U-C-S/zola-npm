@@ -21,15 +21,15 @@ cd ../../examples/ZolaTest
 npm init -y
 
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-  npm install --prefer-offline --no-audit ./zola-bin-linux-*.tgz
+  npm install --prefer-offline --no-audit ./u-c-s-zola-linux-*.tgz
 elif [[ "$OSTYPE" == "darwin"* ]]; then
-  npm install --prefer-offline --no-audit ./zola-bin-darwin-*.tgz
+  npm install --prefer-offline --no-audit ./u-c-s-zola-darwin-*.tgz
 elif [[ "$OSTYPE" == "msys" ]]; then
-  npm install --prefer-offline --no-audit ./zola-bin-win32-*.tgz
+  npm install --prefer-offline --no-audit ./u-c-s-zola-win32-*.tgz
 elif [[ "$OSTYPE" == "win32" ]]; then
-  npm install --prefer-offline --no-audit ./zola-bin-win32-*.tgz
+  npm install --prefer-offline --no-audit ./u-c-s-zola-win32-*.tgz
 fi
 
-npm install --prefer-offline --no-audit cowsay ./zola-bin-0.*.tgz 
+npm install --prefer-offline --no-audit cowsay ./zola-bin-1.*.tgz 
 npm exec -c 'cowsay Zola'
 npm exec -c 'zola-bin --version'
