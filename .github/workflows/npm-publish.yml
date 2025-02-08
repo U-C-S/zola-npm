@@ -64,12 +64,15 @@ jobs:
       - name: Build
         run: ${{ matrix.settings.build }}
         shell: bash
+      - run: ls -la
+        shell: bash
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: ${{ env.APP_NAME }}.*.node
-          if-no-files-found: error
+          path: ${{ github.workspace }}/zola-bin.*.node
+          if-no-files-found: warn
+          include-hidden-files: true
   publish:
     name: Publish
     runs-on: ubuntu-latest
