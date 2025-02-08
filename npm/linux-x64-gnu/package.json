@@ -1,5 +1,5 @@
 {
-	"name": "@zola-bin/arch-linux-x64-gnu",
+	"name": "@u-c-s/zola-linux-x64-gnu",
 	"version": "0.19.2-preview.1",
 	"description": "The binary file of Zola",
 	"repository": {

@@ -1,5 +1,5 @@
 {
-	"name": "@zola-bin/arch-win32-x64-msvc",
+	"name": "@u-c-s/zola-win32-x64-msvc",
 	"version": "0.19.2-preview.1",
 	"description": "The binary file of Zola",
 	"repository": {

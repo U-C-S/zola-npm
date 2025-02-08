@@ -1,5 +1,5 @@
 {
-	"name": "@zola-bin/arch-darwin-arm64",
+	"name": "@u-c-s/zola-darwin-arm64",
 	"version": "0.19.2-preview.1",
 	"description": "The binary file of Zola",
 	"repository": {

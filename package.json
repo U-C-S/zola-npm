@@ -25,8 +25,8 @@
 	"scripts": {
 		"artifacts": "napi artifacts",
 		"setup": "node setup.mjs",
-		"build": "napi build --platform --release --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @zola-bin/arch",
-		"build:debug": "napi build --platform --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @zola-bin/arch",
+		"build": "napi build --platform --release --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola",
+		"build:debug": "napi build --platform --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola",
 		"build:zola-bin": "tsc",
 		"universal": "napi universal",
 		"Test_npm_install": "sh ./examples/test_install.sh",
@@ -87,9 +87,9 @@
 		"url": "https://github.com/U-C-S/zola-npm/issues"
 	},
 	"optionalDependencies": {
-		"@zola-bin/arch-darwin-x64": "0.19.2-preview.1",
-		"@zola-bin/arch-darwin-arm64": "0.19.2-preview.1",
-		"@zola-bin/arch-linux-x64-gnu": "0.19.2-preview.1",
-		"@zola-bin/arch-win32-x64-msvc": "0.19.2-preview.1"
+		"@u-c-s/zola-darwin-x64": "0.19.2-preview.1",
+		"@u-c-s/zola-darwin-arm64": "0.19.2-preview.1",
+		"@u-c-s/zola-linux-x64-gnu": "0.19.2-preview.1",
+		"@u-c-s/zola-win32-x64-msvc": "0.19.2-preview.1"
 	}
 }
