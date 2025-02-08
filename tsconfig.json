@@ -10,5 +10,5 @@
 
 		"allowJs": true
 	},
-	"include": ["src/lib"]
+	"include": ["lib"]
 }
