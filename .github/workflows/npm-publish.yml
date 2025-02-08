@@ -70,7 +70,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: ${{ github.workspace }}/zola-bin.*.node
+          path: ${{ matrix.settings.target }}/zola-bin.*.node
           if-no-files-found: warn
           include-hidden-files: true
   publish:
