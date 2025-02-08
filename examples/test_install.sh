@@ -1,21 +1,22 @@
 #!/usr/bin/env bash
 
-rm -r ./tests/ZolaTest
-mkdir ./tests/ZolaTest
+pwd
 
-cd ./packages/zola-bin
-npm pack --pack-destination ../../tests/ZolaTest
+rm -r ./examples/ZolaTest
+mkdir ./examples/ZolaTest
 
-cd ../zola-bin-win32
-npm pack --pack-destination ../../tests/ZolaTest
+npm pack --pack-destination ./examples/ZolaTest
 
-cd ../zola-bin-darwin
-npm pack --pack-destination ../../tests/ZolaTest
+cd ./npm/win32-x64-msvc
+npm pack --pack-destination ../../examples/ZolaTest
 
-cd ../zola-bin-linux
-npm pack --pack-destination ../../tests/ZolaTest
+cd ./npm/darwin-x64
+npm pack --pack-destination ../../examples/ZolaTest
 
-cd ../../tests/ZolaTest
+cd ./npm/linux-x64-gnu
+npm pack --pack-destination ../../examples/ZolaTest
+
+cd ../../examples/ZolaTest
 
 npm init -y
 

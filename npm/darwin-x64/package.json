@@ -1,5 +1,5 @@
 {
-	"name": "zola-bin-darwin",
+	"name": "zola-bin-darwin-x64",
 	"version": "0.17.5-preview.1",
 	"description": "The binary file of Zola",
 	"repository": {

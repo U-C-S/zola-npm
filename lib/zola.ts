@@ -1,4 +1,4 @@
-import execZola from "./exec.js";
+import { execZola } from "./exec.js";
 
 interface buildOps {
 	base_url?: string;

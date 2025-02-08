@@ -1,5 +1,5 @@
 {
-	"name": "zola-bin-win32",
+	"name": "zola-bin-win32-x64-msvc",
 	"version": "0.17.5-preview.1",
 	"description": "The binary file of Zola",
 	"repository": {

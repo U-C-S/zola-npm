@@ -1,20 +1,24 @@
-mod cli;
-mod cmd;
-mod messages;
-mod prompt;
-
 use std::{
     convert::TryInto,
+    net::{IpAddr, Ipv4Addr},
     path::{Path, PathBuf},
+    time::Instant,
 };
 
 use clap::{CommandFactory, Parser};
 use cli::{Cli, Command};
 use cmd::{build, check, create_new_project, serve};
-use napi_derive::napi;
-use std::time::Instant;
+use errors::anyhow;
 use time::UtcOffset;
 use utils::net::{get_available_port, port_is_available};
+
+use napi_derive::napi;
+
+mod cli;
+mod cmd;
+mod fs_utils;
+mod messages;
+mod prompt;
 
 #[napi]
 pub fn raw_zola_build(
@@ -23,7 +27,7 @@ pub fn raw_zola_build(
     base_url: Option<String>,
     output_dir: Option<String>,
     force: bool,
-    include_drafts: bool,
+    drafts: bool,
 ) {
     let _ = build(
         Path::new(&root_dir),
@@ -31,7 +35,7 @@ pub fn raw_zola_build(
         base_url.as_deref(),
         output_dir.as_ref().map(|t| Path::new(t.as_str())),
         force,
-        include_drafts,
+        drafts,
     );
 }
 
@@ -46,14 +50,14 @@ pub fn raw_zola_check(
     config_file: String,
     base_path: Option<String>,
     base_url: Option<String>,
-    include_drafts: bool,
+    drafts: bool,
 ) {
     let _ = check(
         Path::new(&root_dir),
         Path::new(&config_file),
         base_path.as_ref().map(|t| t.as_str()),
         base_url.as_deref(),
-        include_drafts,
+        drafts,
     );
 }
 
@@ -61,25 +65,34 @@ pub fn raw_zola_check(
 pub fn raw_zola_serve(
     root_dir: String,           //&Path,
     interface: String,          //&str,
-    interface_port: u32,        //u16,
+    port: u32,                  //u16,
     output_dir: Option<String>, //Option<&Path>,
-    base_url: String,           //&str,
-    config_file: String,        // &Path,
+    force: bool,
+    base_url: Option<String>, //&str,
+    config_file: String,      // &Path,
     open: bool,
-    include_drafts: bool,
-    fast_rebuild: bool,
+    drafts: bool,
+    fast: bool,
     no_port_append: bool,
 ) {
+    let interface: IpAddr = {
+        if interface.is_empty() {
+            IpAddr::V4(Ipv4Addr::new(127, 0, 0, 1))
+        } else {
+            interface.parse().unwrap()
+        }
+    };
     let _ = serve(
         Path::new(&root_dir),
-        &interface,
-        interface_port.try_into().unwrap(),
+        interface,
+        port.try_into().unwrap(),
         output_dir.as_ref().map(|t| Path::new(t.as_str())),
-        &base_url,
+        force,
+        base_url.as_deref(),
         Path::new(&config_file),
         open,
-        include_drafts,
-        fast_rebuild,
+        drafts,
+        fast,
         no_port_append,
         UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC),
     );
@@ -90,11 +103,16 @@ pub fn zola_command_parse(input: Vec<String>) {
     let cli = Cli::parse_from(input);
 
     //same as main.rs
-    let cli_dir: PathBuf = cli.root.canonicalize().unwrap_or_else(|_| {
-        panic!(
-            "Could not find canonical path of root dir: {}",
-            cli.root.display()
-        )
+
+    let cli_dir: PathBuf = cli.root.canonicalize().unwrap_or_else(|e| {
+        messages::unravel_errors(
+            &format!(
+                "Could not find canonical path of root dir: {}",
+                cli.root.display()
+            ),
+            &e.into(),
+        );
+        std::process::exit(1);
     });
 
     match cli.command {
@@ -132,6 +150,7 @@ pub fn zola_command_parse(input: Vec<String>) {
             interface,
             mut port,
             output_dir,
+            force,
             base_url,
             drafts,
             open,
@@ -154,10 +173,11 @@ pub fn zola_command_parse(input: Vec<String>) {
             console::info("Building site...");
             if let Err(e) = cmd::serve(
                 &root_dir,
-                &interface,
+                interface,
                 port,
                 output_dir.as_deref(),
-                &base_url,
+                force,
+                base_url.as_deref(),
                 &config_file,
                 open,
                 drafts,
@@ -191,18 +211,40 @@ pub fn zola_command_parse(input: Vec<String>) {
             );
         }
     }
+
+    // End of main.rs / fn main() copy
 }
 
 fn get_config_file_path(dir: &Path, config_path: &Path) -> (PathBuf, PathBuf) {
     let root_dir = dir
         .ancestors()
         .find(|a| a.join(config_path).exists())
-        .unwrap_or_else(|| panic!("could not find directory containing config file"));
+        .unwrap_or_else(|| {
+            messages::unravel_errors(
+                "",
+                &anyhow!(
+                    "{} not found in current directory or ancestors, current_dir is {}",
+                    config_path.display(),
+                    dir.display()
+                ),
+            );
+            std::process::exit(1);
+        });
 
-    // if we got here we found root_dir so config file should exist so we can unwrap safely
-    let config_file = root_dir
-        .join(config_path)
+    // if we got here we found root_dir so config file should exist so we could theoretically unwrap safely
+    let config_file_uncanonicalized = root_dir.join(config_path);
+    let config_file = config_file_uncanonicalized
         .canonicalize()
-        .unwrap_or_else(|_| panic!("could not find directory containing config file"));
+        .unwrap_or_else(|e| {
+            messages::unravel_errors(
+                &format!(
+                    "Could not find canonical path of {}",
+                    config_file_uncanonicalized.display()
+                ),
+                &e.into(),
+            );
+            std::process::exit(1);
+        });
+
     (root_dir.to_path_buf(), config_file)
 }
