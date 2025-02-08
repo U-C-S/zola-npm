@@ -1,5 +1,5 @@
 {
-	"name": "@zola-bin/arch-darwin-x64",
+	"name": "@zola-bin/arch-darwin-arm64",
 	"version": "0.19.2-preview.1",
 	"description": "The binary file of Zola",
 	"repository": {
@@ -12,9 +12,9 @@
 	"cpu": [
 		"x64"
 	],
-	"main": "zola-bin.darwin-x64.node",
+	"main": "zola-bin.darwin-arm64.node",
 	"files": [
-		"zola-bin.darwin-x64.node"
+		"zola-bin.darwin-arm64.node"
 	],
 	"license": "MIT",
 	"engines": {

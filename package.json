@@ -24,10 +24,11 @@
 	],
 	"scripts": {
 		"artifacts": "napi artifacts",
-		"build": "node setup.mjs && napi build --platform --release --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js",
-		"build:debug": "node setup.mjs && napi build --platform --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js",
+		"setup": "node setup.mjs",
+		"build": "napi build --platform --release --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @zola-bin/arch",
+		"build:debug": "napi build --platform --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @zola-bin/arch",
+		"build:zola-bin": "tsc",
 		"universal": "napi universal",
-		"prepare": "tsc",
 		"Test_npm_install": "sh ./examples/test_install.sh",
 		"Test_CZS": "sh ./examples/test_czs.sh"
 	},
@@ -41,7 +42,16 @@
 		"node": ">= 20"
 	},
 	"napi": {
-		"name": "zola-bin"
+		"name": "zola-bin",
+		"triples": {
+			"defaults": false,
+			"additional": [
+				"aarch64-apple-darwin",
+				"x86_64-apple-darwin",
+				"x86_64-pc-windows-msvc",
+				"x86_64-unknown-linux-gnu"
+			]
+		}
 	},
 	"prettier": {
 		"trailingComma": "es5",
@@ -64,16 +74,22 @@
 		"front-end",
 		"framework"
 	],
-	"optionalDependencies": {
-		"zola-bin-darwin-x64": "0.19.2-preview.1",
-		"zola-bin-linux-x64-gnu": "0.19.2-preview.1",
-		"zola-bin-win32-x64-msvc": "0.19.2-preview.1"
-	},
 	"directories": {
 		"example": "examples",
 		"lib": "lib"
 	},
+	"workspaces": [
+		"npm/*",
+		"src/create-zola-site",
+		"./"
+	],
 	"bugs": {
 		"url": "https://github.com/U-C-S/zola-npm/issues"
+	},
+	"optionalDependencies": {
+		"@zola-bin/arch-darwin-x64": "0.19.2-preview.1",
+		"@zola-bin/arch-darwin-arm64": "0.19.2-preview.1",
+		"@zola-bin/arch-linux-x64-gnu": "0.19.2-preview.1",
+		"@zola-bin/arch-win32-x64-msvc": "0.19.2-preview.1"
 	}
 }

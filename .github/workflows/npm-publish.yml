@@ -1,4 +1,4 @@
-name: zola-bin publish pipeline
+name: zola-bin publish actions
 env:
   DEBUG: napi:*
   APP_NAME: zola-bin
@@ -6,42 +6,40 @@ env:
 permissions:
   contents: write
   id-token: write
-on:
+"on":
   release:
     types: [created]
 jobs:
   build:
     strategy:
-      fail-fast: false
+      fail-fast: true
       matrix:
         settings:
-          - host: macos-latest
-            target: x86_64-apple-darwin
-            build: |
-              npm run build
-              strip -x *.node
           - host: windows-latest
-            build: npm run build
+            build: npm run build --target x86_64-pc-windows-msvc
             target: x86_64-pc-windows-msvc
           - host: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             docker: ghcr.io/napi-rs/napi-rs/nodejs-rust:lts-debian
             build: npm run build --target x86_64-unknown-linux-gnu
-    name: ${{ matrix.settings.target }} - node@18
+          - host: macos-latest-arm
+            target: aarch64-apple-darwin
+            build: npm run build --target aarch64-apple-darwin
+          - host: macos-latest-x64
+            target: x86_64-apple-darwin
+            build: npm run build --target x86_64-apple-darwin
+    name: stable - ${{ matrix.settings.target }} - node@20
     runs-on: ${{ matrix.settings.host }}
     steps:
-      - uses: actions/checkout@v3
-      - name: Initialize and update submodules
-        run: |
-          git config --global core.protectNTFS false
-          git submodule update --init --recursive
+      - uses: actions/checkout@v4
+        with:
+          submodules: "recursive"
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         if: ${{ !matrix.settings.docker }}
         with:
-          node-version: 18
-          check-latest: true
-          cache: npm
+          node-version: 20
+          cache: "npm"
       - name: Install Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
         if: ${{ !matrix.settings.docker }}
@@ -49,15 +47,23 @@ jobs:
           toolchain: stable
           targets: ${{ matrix.settings.target }}
       - name: Cache cargo
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: |
             ~/.cargo/registry/index/
             ~/.cargo/registry/cache/
+            ~/.cargo/git/db/
+            .cargo-cache
             zola/target/
-          key: ${{ matrix.settings.target }}-cargo-cache
+          key: ${{ matrix.settings.target }}-cargo-${{ matrix.settings.host }}
+      - name: Setup toolchain
+        run: ${{ matrix.settings.setup }}
+        if: ${{ matrix.settings.setup }}
+        shell: bash
       - name: Install npm dependencies
         run: npm install
+      - name: Setup zola as a library
+        run: npm run setup
       - name: Build in docker
         uses: addnab/docker-run-action@v3
         if: ${{ matrix.settings.docker }}
@@ -70,28 +76,27 @@ jobs:
         if: ${{ !matrix.settings.docker }}
         shell: bash
       - name: Upload artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: "**/*.node"
+          path: ${{ env.APP_NAME }}.*.node
           if-no-files-found: error
   publish:
     name: Publish
     runs-on: ubuntu-latest
-    needs:
-      - build
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Setup node
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
-          node-version: 18
-          check-latest: true
-          cache: npm
+          node-version: 20
+          cache: "npm"
       - name: Install dependencies
         run: npm install
+      - name: Setup zola as a library
+        run: npm run build:zola-bin
       - name: Download all artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           path: artifacts
       - name: Move artifacts
@@ -99,14 +104,10 @@ jobs:
       - name: List packages
         run: ls -R ./npm
         shell: bash
-      - name: Publish
+      - name: Publish zola-bin
         run: |
           npm config set provenance true
-          echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc
-          npm publish ./npm/darwin-x64 --tag next
-          npm publish ./npm/linux-x64-gnu --tag next
-          npm publish ./npm/win32-x64-msvc --tag next
-          npm publish --tag next
+          npm publish --workspaces
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_TOKEN: ${{ secrets.npm_token }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
