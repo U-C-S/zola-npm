@@ -1,7 +1,7 @@
 node_modules
 _dump
-tests/ZolaTest
-tests/ZolaSiteTest
+examples/ZolaTest
+examples/ZolaSiteTest
 
 dump
 target

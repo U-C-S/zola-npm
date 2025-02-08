@@ -1,14 +1,14 @@
 {
 	"name": "create-zola-site",
-	"version": "0.1.5",
+	"version": "0.2.0-preview.1",
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Create Zola-based websites with one command",
-	"homepage": "https://github.com/U-C-S/zola-tools",
+	"homepage": "https://github.com/U-C-S/zola-npm",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/U-C-S/zola-tools",
-		"directory": "packages/create-zola-site"
+		"url": "https://github.com/U-C-S/zola-npm",
+		"directory": "src/create-zola-site"
 	},
 	"type": "module",
 	"bin": {
@@ -16,14 +16,14 @@
 	},
 	"dependencies": {
 		"prompts": "^2.4.2",
-		"validate-npm-package-name": "^5.0.0",
-		"yargs": "^17.7.1"
+		"validate-npm-package-name": "^6.0.0",
+		"yargs": "^17.7.2"
 	},
 	"devDependencies": {
-		"zola-bin": "^0.3.7"
+		"zola-bin": "^1.0.0-preview.1"
 	},
 	"engines": {
-		"node": ">=14.0.0"
+		"node": ">=20.0.0"
 	},
 	"keywords": [
 		"zola",
