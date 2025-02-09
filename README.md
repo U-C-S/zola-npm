@@ -15,8 +15,6 @@ Zola is a static site generator (SSG), similar to Hugo, Pelican, and Jekyll. It 
 - [Forum](https://zola.discourse.group/)
 - [Github Repo](https://github.com/getzola/zola)
 
-This repository provides the zola binary wrapper and the create-zola-site script as NPM packages.
-
 ### Why Zola as a NPM package ??
 
 This package provides Node.js bindings for Zola, compiled directly from its source code and exposed via [Node-API](https://nodejs.org/api/n-api.html) or standard JavaScript calls. This approach ensures performance close to that of native binaries while offering the convenience of an npm package, making deployment easier across various environments due to Node.js' extensive ecosystem and support.
