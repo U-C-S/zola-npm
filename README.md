@@ -1,8 +1,8 @@
 # zola-bin
 
 [![npm](https://img.shields.io/npm/v/zola-bin?label=zola-bin)](https://www.npmjs.com/package/zola-bin)
-[![npm](https://img.shields.io/npm/v/zola-bin-linux?label=npm-zola-version)](https://www.npmjs.com/package/zola-bin-linux)
-[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/getzola/zola?label=zola-official-latest)](https://github.com/getzola/zola/releases)
+[![npm](https://img.shields.io/npm/v/zola-bin-linux?label=zola-npm-built)](https://www.npmjs.com/package/@u-c-s/zola-linux-x64-gnu)
+[![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/getzola/zola?label=zola-official)](https://github.com/getzola/zola/releases)
 
 ## What is Zola ?
 
@@ -19,9 +19,7 @@ This repository provides the zola binary wrapper and the create-zola-site script
 
 ### Why Zola as a NPM package ??
 
-> Zola provides pre-built binaries for MacOS, Linux and Windows on its [GitHub release page](https://github.com/getzola/zola/releases).
-
-This package can be used for calling the pre-built `Zola` binary through [Node](https://nodejs.org), making it a part of node's vast NPM ecosystem. This package is a cross-platform, easy to install and integrate with other NPM packages. It uses the source code of Zola, to get native bindings and call them through [Node-API](https://nodejs.org/api/n-api.html).
+This package provides Node.js bindings for Zola, compiled directly from its source code and exposed via [Node-API](https://nodejs.org/api/n-api.html) or standard JavaScript calls. This approach ensures performance close to that of native binaries while offering the convenience of an npm package, making deployment easier across various environments due to Node.js' extensive ecosystem and support.
 
 ## Usage
 
