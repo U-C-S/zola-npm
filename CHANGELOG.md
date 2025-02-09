@@ -2,7 +2,9 @@
 
 - Use Node-API and napi-rs to build native bindings for zola
 - Update CI to adapt to new build process
+- Update zola version to v0.19.2
 - [BREAKING] Remove direct usage of zola binaries and `getZolaPath` fn
+- [BREAKING] Minimum nodejs version is now v20
 
 ### 0.3.7 (2023-04-02)
 
