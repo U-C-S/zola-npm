@@ -28,6 +28,7 @@ pub fn raw_zola_build(
     output_dir: Option<String>,
     force: bool,
     drafts: bool,
+    minify: bool,
 ) {
     let _ = build(
         Path::new(&root_dir),
@@ -36,6 +37,7 @@ pub fn raw_zola_build(
         output_dir.as_ref().map(|t| Path::new(t.as_str())),
         force,
         drafts,
+        minify,
     );
 }
 
@@ -51,6 +53,7 @@ pub fn raw_zola_check(
     base_path: Option<String>,
     base_url: Option<String>,
     drafts: bool,
+    skip_external_links: bool,
 ) {
     let _ = check(
         Path::new(&root_dir),
@@ -58,6 +61,7 @@ pub fn raw_zola_check(
         base_path.as_ref().map(|t| t.as_str()),
         base_url.as_deref(),
         drafts,
+        skip_external_links,
     );
 }
 
@@ -71,9 +75,11 @@ pub fn raw_zola_serve(
     base_url: Option<String>, //&str,
     config_file: String,      // &Path,
     open: bool,
+    store_html: bool,
     drafts: bool,
     fast: bool,
     no_port_append: bool,
+    extra_watch_paths: Vec<String>,
 ) {
     let interface: IpAddr = {
         if interface.is_empty() {
@@ -92,9 +98,11 @@ pub fn raw_zola_serve(
         Path::new(&config_file),
         open,
         drafts,
+        store_html,
         fast,
         no_port_append,
         UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC),
+        extra_watch_paths,
     );
 }
 
@@ -127,6 +135,7 @@ pub fn zola_command_parse(input: Vec<String>) {
             output_dir,
             force,
             drafts,
+            minify,
         } => {
             console::info("Building site...");
             let start = Instant::now();
@@ -138,6 +147,7 @@ pub fn zola_command_parse(input: Vec<String>) {
                 output_dir.as_deref(),
                 force,
                 drafts,
+                minify,
             ) {
                 Ok(()) => messages::report_elapsed_time(start),
                 Err(e) => {
@@ -154,16 +164,18 @@ pub fn zola_command_parse(input: Vec<String>) {
             base_url,
             drafts,
             open,
+            store_html,
             fast,
             no_port_append,
+            extra_watch_path,
         } => {
-            if port != 1111 && !port_is_available(port) {
+            if port != 1111 && !port_is_available(interface, port) {
                 console::error("The requested port is not available");
                 std::process::exit(1);
             }
 
-            if !port_is_available(port) {
-                port = get_available_port(1111).unwrap_or_else(|| {
+            if !port_is_available(interface, port) {
+                port = get_available_port(interface, 1111).unwrap_or_else(|| {
                     console::error("No port available");
                     std::process::exit(1);
                 });
@@ -181,19 +193,31 @@ pub fn zola_command_parse(input: Vec<String>) {
                 &config_file,
                 open,
                 drafts,
+                store_html,
                 fast,
                 no_port_append,
                 UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC),
+                extra_watch_path,
             ) {
                 messages::unravel_errors("Failed to serve the site", &e);
                 std::process::exit(1);
             }
         }
-        Command::Check { drafts } => {
+        Command::Check {
+            drafts,
+            skip_external_links,
+        } => {
             console::info("Checking site...");
             let start = Instant::now();
             let (root_dir, config_file) = get_config_file_path(&cli_dir, &cli.config);
-            match cmd::check(&root_dir, &config_file, None, None, drafts) {
+            match cmd::check(
+                &root_dir,
+                &config_file,
+                None,
+                None,
+                drafts,
+                skip_external_links,
+            ) {
                 Ok(()) => messages::report_elapsed_time(start),
                 Err(e) => {
                     messages::unravel_errors("Failed to check the site", &e);

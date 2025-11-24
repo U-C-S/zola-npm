@@ -1,15 +1,25 @@
 import { execZola } from "./exec.js";
 
+interface zolaOps {
+	config_file?: string;
+	root?: string;
+}
+
 interface buildOps {
 	base_url?: string;
 	output_dir?: string;
-	config_file?: string;
+	force?: boolean;
+	drafts?: boolean;
+	minify?: boolean;
 }
 
-interface serveOps extends buildOps {
+interface serveOps {
+	base_url?: string;
+	output_dir?: string;
 	port?: number;
 	interface?: string;
 	open?: boolean;
+	drafts?: boolean;
 }
 
 function buildArgsParse(options?: buildOps) {
