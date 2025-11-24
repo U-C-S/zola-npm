@@ -1,6 +1,6 @@
 {
 	"name": "zola-bin",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Zola, A Static Site Generator, as a NPM Package",
@@ -25,33 +25,30 @@
 	"scripts": {
 		"artifacts": "napi artifacts",
 		"setup": "node setup.mjs",
-		"build": "napi build --platform --release --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola",
-		"build:debug": "napi build --platform --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola",
+		"build": "napi build --platform --release --manifest-path ./zola/Cargo.toml --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola",
+		"build:debug": "napi build --platform --manifest-path ./zola/Cargo.toml --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola",
 		"build:zola-bin": "tsc",
-		"universal": "napi universal",
+		"universal": "napi universalize",
 		"Test_npm_install": "sh ./examples/test_install.sh",
 		"Test_CZS": "sh ./examples/test_czs.sh"
 	},
 	"devDependencies": {
-		"@napi-rs/cli": "^2.18.4",
-		"@types/node": "^22.13.8",
-		"smol-toml": "^1.3.1",
-		"typescript": "^5.8.2"
+		"@napi-rs/cli": "^3.4.1",
+		"@types/node": "^24.10.1",
+		"smol-toml": "^1.5.2",
+		"typescript": "^5.9.3"
 	},
 	"engines": {
 		"node": ">= 20"
 	},
 	"napi": {
-		"name": "zola-bin",
-		"triples": {
-			"defaults": false,
-			"additional": [
-				"aarch64-apple-darwin",
-				"x86_64-apple-darwin",
-				"x86_64-pc-windows-msvc",
-				"x86_64-unknown-linux-gnu"
-			]
-		}
+		"binaryName": "zola-bin",
+		"targets": [
+			"aarch64-apple-darwin",
+			"x86_64-apple-darwin",
+			"x86_64-pc-windows-msvc",
+			"x86_64-unknown-linux-gnu"
+		]
 	},
 	"prettier": {
 		"trailingComma": "es5",
