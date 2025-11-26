@@ -1,6 +1,6 @@
 {
 	"name": "@u-c-s/zola-linux-x64-gnu",
-	"version": "0.19.2",
+	"version": "0.21.0",
 	"description": "The binary file of Zola",
 	"repository": {
 		"type": "git",
