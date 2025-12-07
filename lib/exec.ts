@@ -9,7 +9,6 @@ import { zolaCommandParse } from "../bindings.js";
 export function execZola(args: string[]) {
 	try {
 		zolaCommandParse(args);
-		// execFileSync(getZolaPath(), args, { stdio: "inherit" });
 	} catch (error: any) {
 		console.error(error.message);
 	}
