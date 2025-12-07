@@ -27,7 +27,7 @@ jobs:
           - host: macos-13
             target: x86_64-apple-darwin
             build: npm run build --target x86_64-apple-darwin
-    name: stable - ${{ matrix.settings.target }} - node@20
+    name: stable - ${{ matrix.settings.target }} - node@24
     runs-on: ${{ matrix.settings.host }}
     steps:
       - uses: actions/checkout@v6
@@ -36,7 +36,7 @@ jobs:
       - name: Setup node
         uses: actions/setup-node@v6
         with:
-          node-version: 20
+          node-version: 24
           cache: "npm"
       - name: Install Rust Toolchain
         uses: dtolnay/rust-toolchain@stable
