@@ -1,5 +1,7 @@
-import zola from "./zola.js";
-import { zolaCommandParse, rawZolaBuild, rawZolaCheck, rawZolaInit, rawZolaServe } from "../bindings.js";
-
-export default zola;
-export { zolaCommandParse, rawZolaBuild, rawZolaCheck, rawZolaInit, rawZolaServe };
+export {
+	zolaCommandParse,
+	rawZolaBuild as build,
+	rawZolaCheck as check,
+	rawZolaInit as init,
+	rawZolaServe as serve,
+} from "../bindings.js";
