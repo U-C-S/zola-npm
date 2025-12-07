@@ -7,7 +7,6 @@ use std::{
 
 use clap::{CommandFactory, Parser};
 use cli::{Cli, Command};
-use cmd::{build, check, create_new_project, serve};
 use errors::anyhow;
 use time::UtcOffset;
 use utils::net::{get_available_port, port_is_available};
@@ -28,20 +27,22 @@ pub fn raw_zola_build(
     output_dir: Option<String>,
     force: bool,
     drafts: bool,
+    minify: bool,
 ) {
-    let _ = build(
+    let _ = cmd::build(
         Path::new(&root_dir),
         Path::new(&config_file),
         base_url.as_deref(),
         output_dir.as_ref().map(|t| Path::new(t.as_str())),
         force,
         drafts,
+        minify,
     );
 }
 
 #[napi]
 pub fn raw_zola_init(name: String, force: bool) {
-    let _ = create_new_project(name.as_str(), force);
+    let _ = cmd::create_new_project(name.as_str(), force);
 }
 
 #[napi]
@@ -51,13 +52,15 @@ pub fn raw_zola_check(
     base_path: Option<String>,
     base_url: Option<String>,
     drafts: bool,
+    skip_external_links: bool,
 ) {
-    let _ = check(
+    let _ = cmd::check(
         Path::new(&root_dir),
         Path::new(&config_file),
         base_path.as_ref().map(|t| t.as_str()),
         base_url.as_deref(),
         drafts,
+        skip_external_links,
     );
 }
 
@@ -71,9 +74,11 @@ pub fn raw_zola_serve(
     base_url: Option<String>, //&str,
     config_file: String,      // &Path,
     open: bool,
+    store_html: bool,
     drafts: bool,
     fast: bool,
     no_port_append: bool,
+    extra_watch_paths: Vec<String>,
 ) {
     let interface: IpAddr = {
         if interface.is_empty() {
@@ -82,7 +87,7 @@ pub fn raw_zola_serve(
             interface.parse().unwrap()
         }
     };
-    let _ = serve(
+    let _ = cmd::serve(
         Path::new(&root_dir),
         interface,
         port.try_into().unwrap(),
@@ -92,9 +97,11 @@ pub fn raw_zola_serve(
         Path::new(&config_file),
         open,
         drafts,
+        store_html,
         fast,
         no_port_append,
         UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC),
+        extra_watch_paths,
     );
 }
 
@@ -106,10 +113,7 @@ pub fn zola_command_parse(input: Vec<String>) {
 
     let cli_dir: PathBuf = cli.root.canonicalize().unwrap_or_else(|e| {
         messages::unravel_errors(
-            &format!(
-                "Could not find canonical path of root dir: {}",
-                cli.root.display()
-            ),
+            &format!("Could not find canonical path of root dir: {}", cli.root.display()),
             &e.into(),
         );
         std::process::exit(1);
@@ -122,12 +126,7 @@ pub fn zola_command_parse(input: Vec<String>) {
                 std::process::exit(1);
             }
         }
-        Command::Build {
-            base_url,
-            output_dir,
-            force,
-            drafts,
-        } => {
+        Command::Build { base_url, output_dir, force, drafts, minify } => {
             console::info("Building site...");
             let start = Instant::now();
             let (root_dir, config_file) = get_config_file_path(&cli_dir, &cli.config);
@@ -138,6 +137,7 @@ pub fn zola_command_parse(input: Vec<String>) {
                 output_dir.as_deref(),
                 force,
                 drafts,
+                minify,
             ) {
                 Ok(()) => messages::report_elapsed_time(start),
                 Err(e) => {
@@ -154,16 +154,18 @@ pub fn zola_command_parse(input: Vec<String>) {
             base_url,
             drafts,
             open,
+            store_html,
             fast,
             no_port_append,
+            extra_watch_path,
         } => {
-            if port != 1111 && !port_is_available(port) {
+            if port != 1111 && !port_is_available(interface, port) {
                 console::error("The requested port is not available");
                 std::process::exit(1);
             }
 
-            if !port_is_available(port) {
-                port = get_available_port(1111).unwrap_or_else(|| {
+            if !port_is_available(interface, port) {
+                port = get_available_port(interface, 1111).unwrap_or_else(|| {
                     console::error("No port available");
                     std::process::exit(1);
                 });
@@ -181,19 +183,21 @@ pub fn zola_command_parse(input: Vec<String>) {
                 &config_file,
                 open,
                 drafts,
+                store_html,
                 fast,
                 no_port_append,
                 UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC),
+                extra_watch_path,
             ) {
                 messages::unravel_errors("Failed to serve the site", &e);
                 std::process::exit(1);
             }
         }
-        Command::Check { drafts } => {
+        Command::Check { drafts, skip_external_links } => {
             console::info("Checking site...");
             let start = Instant::now();
             let (root_dir, config_file) = get_config_file_path(&cli_dir, &cli.config);
-            match cmd::check(&root_dir, &config_file, None, None, drafts) {
+            match cmd::check(&root_dir, &config_file, None, None, drafts, skip_external_links) {
                 Ok(()) => messages::report_elapsed_time(start),
                 Err(e) => {
                     messages::unravel_errors("Failed to check the site", &e);
@@ -203,12 +207,7 @@ pub fn zola_command_parse(input: Vec<String>) {
         }
         Command::Completion { shell } => {
             let cmd = &mut Cli::command();
-            clap_complete::generate(
-                shell,
-                cmd,
-                cmd.get_name().to_string(),
-                &mut std::io::stdout(),
-            );
+            clap_complete::generate(shell, cmd, cmd.get_name().to_string(), &mut std::io::stdout());
         }
     }
 
@@ -216,35 +215,27 @@ pub fn zola_command_parse(input: Vec<String>) {
 }
 
 fn get_config_file_path(dir: &Path, config_path: &Path) -> (PathBuf, PathBuf) {
-    let root_dir = dir
-        .ancestors()
-        .find(|a| a.join(config_path).exists())
-        .unwrap_or_else(|| {
-            messages::unravel_errors(
-                "",
-                &anyhow!(
-                    "{} not found in current directory or ancestors, current_dir is {}",
-                    config_path.display(),
-                    dir.display()
-                ),
-            );
-            std::process::exit(1);
-        });
+    let root_dir = dir.ancestors().find(|a| a.join(config_path).exists()).unwrap_or_else(|| {
+        messages::unravel_errors(
+            "",
+            &anyhow!(
+                "{} not found in current directory or ancestors, current_dir is {}",
+                config_path.display(),
+                dir.display()
+            ),
+        );
+        std::process::exit(1);
+    });
 
     // if we got here we found root_dir so config file should exist so we could theoretically unwrap safely
     let config_file_uncanonicalized = root_dir.join(config_path);
-    let config_file = config_file_uncanonicalized
-        .canonicalize()
-        .unwrap_or_else(|e| {
-            messages::unravel_errors(
-                &format!(
-                    "Could not find canonical path of {}",
-                    config_file_uncanonicalized.display()
-                ),
-                &e.into(),
-            );
-            std::process::exit(1);
-        });
+    let config_file = config_file_uncanonicalized.canonicalize().unwrap_or_else(|e| {
+        messages::unravel_errors(
+            &format!("Could not find canonical path of {}", config_file_uncanonicalized.display()),
+            &e.into(),
+        );
+        std::process::exit(1);
+    });
 
     (root_dir.to_path_buf(), config_file)
 }

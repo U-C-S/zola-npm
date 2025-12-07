@@ -1,3 +1,9 @@
+## 2.0.0 (UNRELEASED)
+
+- Update zola version to v0.21.0
+- [BREAKING] Changes to zola JS API functions
+- (Internal) Update napi-rs to v3.x
+
 ## 1.0.0 (2025-02-09)
 
 - Use Node-API and napi-rs to build native bindings for zola

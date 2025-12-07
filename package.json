@@ -1,6 +1,6 @@
 {
 	"name": "zola-bin",
-	"version": "1.0.0",
+	"version": "2.0.0",
 	"author": "U-C-S",
 	"license": "MIT",
 	"description": "Zola, A Static Site Generator, as a NPM Package",
@@ -25,33 +25,30 @@
 	"scripts": {
 		"artifacts": "napi artifacts",
 		"setup": "node setup.mjs",
-		"build": "napi build --platform --release --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola",
-		"build:debug": "napi build --platform --cargo-cwd \"zola\" --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola",
+		"build": "napi build --platform --release --manifest-path ./zola/Cargo.toml --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola  -o ./",
+		"build:debug": "napi build --platform --manifest-path ./zola/Cargo.toml --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola -o ./",
 		"build:zola-bin": "tsc",
-		"universal": "napi universal",
-		"Test_npm_install": "sh ./examples/test_install.sh",
-		"Test_CZS": "sh ./examples/test_czs.sh"
+		"universal": "napi universalize",
+		"test:npm-i": "sh ./examples/test_install.sh",
+		"test:czs": "sh ./examples/test_czs.sh"
 	},
 	"devDependencies": {
-		"@napi-rs/cli": "^2.18.4",
-		"@types/node": "^22.13.1",
-		"smol-toml": "^1.3.1",
-		"typescript": "^5.7.3"
+		"@napi-rs/cli": "^3.5.0",
+		"@types/node": "^24.10.1",
+		"smol-toml": "^1.5.2",
+		"typescript": "^5.9.3"
 	},
 	"engines": {
 		"node": ">= 20"
 	},
 	"napi": {
-		"name": "zola-bin",
-		"triples": {
-			"defaults": false,
-			"additional": [
-				"aarch64-apple-darwin",
-				"x86_64-apple-darwin",
-				"x86_64-pc-windows-msvc",
-				"x86_64-unknown-linux-gnu"
-			]
-		}
+		"binaryName": "zola-bin",
+		"targets": [
+			"aarch64-apple-darwin",
+			"x86_64-apple-darwin",
+			"x86_64-pc-windows-msvc",
+			"x86_64-unknown-linux-gnu"
+		]
 	},
 	"prettier": {
 		"trailingComma": "es5",
@@ -82,9 +79,9 @@
 		"url": "https://github.com/U-C-S/zola-npm/issues"
 	},
 	"optionalDependencies": {
-		"@u-c-s/zola-darwin-x64": "0.19.2",
-		"@u-c-s/zola-darwin-arm64": "0.19.2",
-		"@u-c-s/zola-linux-x64-gnu": "0.19.2",
-		"@u-c-s/zola-win32-x64-msvc": "0.19.2"
+		"@u-c-s/zola-darwin-x64": "0.21.0",
+		"@u-c-s/zola-darwin-arm64": "0.21.0",
+		"@u-c-s/zola-linux-x64-gnu": "0.21.0",
+		"@u-c-s/zola-win32-x64-msvc": "0.21.0"
 	}
 }

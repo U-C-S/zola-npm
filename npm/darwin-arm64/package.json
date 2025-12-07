@@ -1,6 +1,6 @@
 {
 	"name": "@u-c-s/zola-darwin-arm64",
-	"version": "0.19.2",
+	"version": "0.21.0",
 	"description": "The binary file of Zola",
 	"repository": {
 		"type": "git",
