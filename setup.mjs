@@ -12,11 +12,11 @@ zolaTomlParsed["lib"] = {};
 zolaTomlParsed["lib"]["crate-type"] = ["cdylib"];
 zolaTomlParsed["build-dependencies"]["napi-build"] = "2.3.1";
 zolaTomlParsed["dependencies"]["napi"] = {
-	version: "3.5.2",
+	version: "3.6.1",
 	"default-features": false,
 	features: ["napi9"],
 };
-zolaTomlParsed["dependencies"]["napi-derive"] = "3.3.3";
+zolaTomlParsed["dependencies"]["napi-derive"] = "3.4.0";
 
 let newZolaToml = stringify(zolaTomlParsed);
 writeFile("zola/Cargo.toml", newZolaToml, { encoding: "utf8" });

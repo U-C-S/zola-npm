@@ -33,7 +33,7 @@
 		"test:czs": "sh ./examples/test_czs.sh"
 	},
 	"devDependencies": {
-		"@napi-rs/cli": "^3.4.1",
+		"@napi-rs/cli": "^3.5.0",
 		"@types/node": "^24.10.1",
 		"smol-toml": "^1.5.2",
 		"typescript": "^5.9.3"
