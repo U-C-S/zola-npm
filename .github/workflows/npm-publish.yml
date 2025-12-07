@@ -67,7 +67,7 @@ jobs:
         uses: actions/upload-artifact@v5
         with:
           name: bindings-${{ matrix.settings.target }}
-          path: ${{ matrix.settings.target }}/zola-bin.*.node
+          path: zola-bin.*.node
           if-no-files-found: error
           include-hidden-files: true
           retention-days: 3
