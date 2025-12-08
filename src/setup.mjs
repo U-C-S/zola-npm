@@ -1,6 +1,8 @@
 import { copyFile, readFile, writeFile, rm } from "fs/promises";
 import { parse, stringify } from "smol-toml";
 
+console.log(`-> Current working directory: ${process.cwd()}`);
+
 copyFile("src/lib.rs", "zola/src/lib.rs");
 copyFile("src/build.rs", "zola/build.rs");
 
@@ -21,4 +23,4 @@ zolaTomlParsed["dependencies"]["napi-derive"] = "3.4.0";
 let newZolaToml = stringify(zolaTomlParsed);
 writeFile("zola/Cargo.toml", newZolaToml, { encoding: "utf8" });
 rm("zola/src/main.rs", { force: true });
-console.log("Modified the Zola's git submodule directory files.");
+console.log("-> Modified the Zola's git submodule directory files.");

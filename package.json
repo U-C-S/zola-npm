@@ -24,7 +24,7 @@
 	],
 	"scripts": {
 		"artifacts": "napi artifacts",
-		"setup": "node setup.mjs",
+		"setup": "node src/setup.mjs",
 		"build": "napi build --platform --release --manifest-path ./zola/Cargo.toml --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola -o ./",
 		"build:debug": "napi build --platform --manifest-path ./zola/Cargo.toml --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola -o ./",
 		"build:zola-bin": "tsc",
