@@ -1,5 +1,6 @@
 use std::{
     convert::TryInto,
+    fs::create_dir,
     net::{IpAddr, Ipv4Addr},
     path::{Path, PathBuf},
     time::Instant,
@@ -9,7 +10,10 @@ use clap::{CommandFactory, Parser};
 use cli::{Cli, Command};
 use errors::anyhow;
 use time::UtcOffset;
-use utils::net::{get_available_port, port_is_available};
+use utils::{
+    fs::create_file,
+    net::{get_available_port, port_is_available},
+};
 
 use napi_derive::napi;
 
@@ -40,9 +44,63 @@ pub fn raw_zola_build(
     );
 }
 
+// ----------- code from cmd/init.rs -----------
+
+const CONFIG: &str = r#"
+# The URL the site will be built for
+base_url = "%BASE_URL%"
+
+# Whether to automatically compile all Sass files in the sass directory
+compile_sass = %COMPILE_SASS%
+
+# Whether to build a search index to be used later on by a JavaScript library
+build_search_index = %SEARCH%
+
+[markdown]
+# Whether to do syntax highlighting
+# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
+highlight_code = %HIGHLIGHT%
+
+[extra]
+# Put all your custom variables here
+"#;
+
+fn init_populate(path: &Path, compile_sass: bool, config: &str) -> errors::Result<()> {
+    if !path.exists() {
+        create_dir(path)?;
+    }
+    create_file(&path.join("config.toml"), config)?;
+    create_dir(path.join("content"))?;
+    create_dir(path.join("templates"))?;
+    create_dir(path.join("static"))?;
+    create_dir(path.join("themes"))?;
+    if compile_sass {
+        create_dir(path.join("sass"))?;
+    }
+
+    Ok(())
+}
+
+// ----------- end of code from cmd/init.rs -----------
+
 #[napi]
-pub fn raw_zola_init(name: String, force: bool) {
-    let _ = cmd::create_new_project(name.as_str(), force);
+pub fn raw_zola_init(
+    name: String,
+    force: bool,
+    base_url: Option<String>,
+    compile_sass: Option<bool>,
+    highlight: Option<bool>,
+    search: Option<bool>,
+) {
+    let path = Path::new(&name);
+    let compile_sass = compile_sass.unwrap_or(true);
+    let config = CONFIG
+        .trim_start()
+        .replace("%BASE_URL%", &base_url.unwrap_or(String::from("https://example.com")))
+        .replace("%COMPILE_SASS%", &format!("{}", compile_sass))
+        .replace("%SEARCH%", &format!("{}", search.unwrap_or(false)))
+        .replace("%HIGHLIGHT%", &format!("{}", highlight.unwrap_or(false)));
+    init_populate(path, compile_sass, &config).unwrap();
 }
 
 #[napi]
