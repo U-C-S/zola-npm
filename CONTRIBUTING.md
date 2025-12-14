@@ -1,8 +1,15 @@
 # Developing zola-bin in your system
 
+This package primarily uses/depends on the [napi-rs](https://napi.rs/) library.
+For further information on the internal workings of this library, see the
+[napi-rs docs](https://napi.rs/docs/introduction/getting-started)
+
 ## Building Locally
 
-### Clone the repo
+Make sure you are using atleast Node.js version 20.19 or higher and latest
+version of the rust compiler/cargo.
+
+### Clone the repo and install the npm dependencies
 
 ```sh
 git clone https://github.com/U-C-S/zola-npm.git
@@ -12,6 +19,10 @@ git submodule update --init --recursive
 ```
 
 The `zola` repo is also part of the repo, linked to a release/git tag.
+
+```sh
+npm install
+```
 
 ### Run the script to modify the zola repo code
 
