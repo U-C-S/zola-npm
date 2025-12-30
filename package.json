@@ -33,9 +33,9 @@
 		"test:czs": "sh ./examples/test_czs.sh"
 	},
 	"devDependencies": {
-		"@napi-rs/cli": "^3.5.0",
-		"@types/node": "^24.10.1",
-		"smol-toml": "^1.5.2",
+		"@napi-rs/cli": "^3.5.1",
+		"@types/node": "^25.0.3",
+		"smol-toml": "^1.6.0",
 		"typescript": "^5.9.3"
 	},
 	"engines": {
