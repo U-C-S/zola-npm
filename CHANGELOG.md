@@ -1,4 +1,10 @@
-## 2.0.0 (UNRELEASED)
+### 2.1.0 (CURRENT-RELEASE)
+
+- Update zola version to v0.22.0
+- Add new serve option: `debounce` to the JavaScript API
+- (Internal) Update napi, napi-derive
+
+## 2.0.0 (2025-12-07)
 
 - Update zola version to v0.21.0
 - [BREAKING] Changes to zola JS API functions
