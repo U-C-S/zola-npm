@@ -3,12 +3,15 @@ use std::{
     fs::create_dir,
     net::{IpAddr, Ipv4Addr},
     path::{Path, PathBuf},
+    sync::LazyLock,
     time::Instant,
 };
 
 use clap::{CommandFactory, Parser};
 use cli::{Cli, Command};
+use env_logger::Env;
 use errors::anyhow;
+use log;
 use time::UtcOffset;
 use utils::{
     fs::create_file,
@@ -57,9 +60,9 @@ compile_sass = %COMPILE_SASS%
 build_search_index = %SEARCH%
 
 [markdown]
-# Whether to do syntax highlighting
-# Theme can be customised by setting the `highlight_theme` variable to a theme supported by Zola
-highlight_code = %HIGHLIGHT%
+
+[markdown.highlighting]
+theme = "catppuccin-mocha"
 
 [extra]
 # Put all your custom variables here
@@ -86,10 +89,8 @@ fn init_populate(path: &Path, compile_sass: bool, config: &str) -> errors::Resul
 #[napi]
 pub fn raw_zola_init(
     name: String,
-    force: bool,
     base_url: Option<String>,
     compile_sass: Option<bool>,
-    highlight: Option<bool>,
     search: Option<bool>,
 ) {
     let path = Path::new(&name);
@@ -98,8 +99,7 @@ pub fn raw_zola_init(
         .trim_start()
         .replace("%BASE_URL%", &base_url.unwrap_or(String::from("https://example.com")))
         .replace("%COMPILE_SASS%", &format!("{}", compile_sass))
-        .replace("%SEARCH%", &format!("{}", search.unwrap_or(false)))
-        .replace("%HIGHLIGHT%", &format!("{}", highlight.unwrap_or(false)));
+        .replace("%SEARCH%", &format!("{}", search.unwrap_or(false)));
     init_populate(path, compile_sass, &config).unwrap();
 }
 
@@ -137,6 +137,7 @@ pub fn raw_zola_serve(
     fast: bool,
     no_port_append: bool,
     extra_watch_paths: Vec<String>,
+    debounce: Option<u32>,
 ) {
     let interface: IpAddr = {
         if interface.is_empty() {
@@ -160,14 +161,49 @@ pub fn raw_zola_serve(
         no_port_append,
         UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC),
         extra_watch_paths,
+        debounce.unwrap_or(1000).into(),
     );
 }
+
+static SHOULD_COLOR_OUTPUT: LazyLock<anstream::ColorChoice> =
+    LazyLock::new(|| anstream::AutoStream::choice(&std::io::stderr()));
 
 #[napi]
 pub fn zola_command_parse(input: Vec<String>) {
     let cli = Cli::parse_from(input);
 
-    //same as main.rs
+    // ------- same as main.rs -------
+    // ensure that logging uses the “info” level for anything in Zola by default
+    let env = Env::new().default_filter_or("zola=info");
+    env_logger::Builder::from_env(env)
+        .format(|f, record| {
+            use std::io::Write;
+            match record.level() {
+                // INFO is used for normal CLI outputs, which we want to print with a little less noise
+                log::Level::Info => {
+                    writeln!(f, "{}", record.args())
+                }
+                _ => {
+                    use anstyle::*;
+                    let style = Style::new()
+                        .fg_color(Some(Color::Ansi(match record.level() {
+                            log::Level::Error => AnsiColor::Red,
+                            log::Level::Warn => AnsiColor::Yellow,
+                            log::Level::Info => AnsiColor::Green,
+                            log::Level::Debug => AnsiColor::Cyan,
+                            log::Level::Trace => AnsiColor::BrightBlack,
+                        })))
+                        .bold();
+                    // Because the formatter erases the “terminal-ness” of stderr, we manually set the color behavior here.
+                    let mut f = anstream::AutoStream::new(
+                        f as &mut dyn std::io::Write,
+                        *SHOULD_COLOR_OUTPUT,
+                    );
+                    writeln!(f, "{style}{:5}{style:#} {}", record.level().as_str(), record.args())
+                }
+            }
+        })
+        .init();
 
     let cli_dir: PathBuf = cli.root.canonicalize().unwrap_or_else(|e| {
         messages::unravel_errors(
@@ -185,7 +221,7 @@ pub fn zola_command_parse(input: Vec<String>) {
             }
         }
         Command::Build { base_url, output_dir, force, drafts, minify } => {
-            console::info("Building site...");
+            log::info!("Building site...");
             let start = Instant::now();
             let (root_dir, config_file) = get_config_file_path(&cli_dir, &cli.config);
             match cmd::build(
@@ -216,21 +252,22 @@ pub fn zola_command_parse(input: Vec<String>) {
             fast,
             no_port_append,
             extra_watch_path,
+            debounce,
         } => {
             if port != 1111 && !port_is_available(interface, port) {
-                console::error("The requested port is not available");
+                log::error!("The requested port is not available");
                 std::process::exit(1);
             }
 
             if !port_is_available(interface, port) {
                 port = get_available_port(interface, 1111).unwrap_or_else(|| {
-                    console::error("No port available");
+                    log::error!("No port available");
                     std::process::exit(1);
                 });
             }
 
             let (root_dir, config_file) = get_config_file_path(&cli_dir, &cli.config);
-            console::info("Building site...");
+            log::info!("Building site...");
             if let Err(e) = cmd::serve(
                 &root_dir,
                 interface,
@@ -246,13 +283,14 @@ pub fn zola_command_parse(input: Vec<String>) {
                 no_port_append,
                 UtcOffset::current_local_offset().unwrap_or(UtcOffset::UTC),
                 extra_watch_path,
+                debounce,
             ) {
                 messages::unravel_errors("Failed to serve the site", &e);
                 std::process::exit(1);
             }
         }
         Command::Check { drafts, skip_external_links } => {
-            console::info("Checking site...");
+            log::info!("Checking site...");
             let start = Instant::now();
             let (root_dir, config_file) = get_config_file_path(&cli_dir, &cli.config);
             match cmd::check(&root_dir, &config_file, None, None, drafts, skip_external_links) {

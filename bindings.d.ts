@@ -4,8 +4,8 @@ export declare function rawZolaBuild(rootDir: string, configFile: string, baseUr
 
 export declare function rawZolaCheck(rootDir: string, configFile: string, basePath: string | undefined | null, baseUrl: string | undefined | null, drafts: boolean, skipExternalLinks: boolean): void
 
-export declare function rawZolaInit(name: string, force: boolean, baseUrl?: string | undefined | null, compileSass?: boolean | undefined | null, highlight?: boolean | undefined | null, search?: boolean | undefined | null): void
+export declare function rawZolaInit(name: string, baseUrl?: string | undefined | null, compileSass?: boolean | undefined | null, search?: boolean | undefined | null): void
 
-export declare function rawZolaServe(rootDir: string, interface: string, port: number, outputDir: string | undefined | null, force: boolean, baseUrl: string | undefined | null, configFile: string, open: boolean, storeHtml: boolean, drafts: boolean, fast: boolean, noPortAppend: boolean, extraWatchPaths: Array<string>): void
+export declare function rawZolaServe(rootDir: string, interface: string, port: number, outputDir: string | undefined | null, force: boolean, baseUrl: string | undefined | null, configFile: string, open: boolean, storeHtml: boolean, drafts: boolean, fast: boolean, noPortAppend: boolean, extraWatchPaths: Array<string>, debounce?: number | undefined | null): void
 
 export declare function zolaCommandParse(input: Array<string>): void

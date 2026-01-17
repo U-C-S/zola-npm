@@ -92,6 +92,10 @@ interface ServeOptions {
 	 * Extra directories to watch for live reload, relative to the project root.
 	 */
 	extraWatchPaths: Array<string>;
+	/**
+	 * Debounce time (in milliseconds) for rebuilds when files change. Defaults to 1000ms
+	 */
+	debounce?: number;
 }
 
 /**
@@ -118,7 +122,7 @@ export function serve(rootDir: string, configFile?: string, options?: ServeOptio
 		options?.drafts ?? false,
 		options?.fast ?? false,
 		options?.noPortAppend ?? false,
-		options?.extraWatchPaths ?? []
+		options?.extraWatchPaths ?? [],
 	);
 }
 
@@ -130,7 +134,7 @@ export function serve(rootDir: string, configFile?: string, options?: ServeOptio
  * @param force Try to populate a non-empty directory.
  */
 export function init(name: string, force: boolean = false) {
-	rawZolaInit(name, force);
+	rawZolaInit(name);
 }
 
 interface checkOptions {
