@@ -2,6 +2,7 @@
 
 - Update zola version to v0.22.0
 - Add new serve option: `debounce` to the JavaScript API
+- (Minor BREAKING) Change `init` fn in JavaScript API to remove optional `force` parameter
 - (Internal) Update napi, napi-derive
 
 ## 2.0.0 (2025-12-07)

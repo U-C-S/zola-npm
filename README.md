@@ -84,10 +84,11 @@ interface ServeOptions {
 	fast: boolean;
 	noPortAppend: boolean;
 	extraWatchPaths: Array<string>;
+	debounce?: number;
 }
 export declare function serve(rootDir: string, configFile?: string, options?: ServeOptions): void;
 
-export declare function init(name: string, force?: boolean): void;
+export declare function init(name: string): void;
 
 interface checkOptions {
 	basePath: string | undefined | null;
