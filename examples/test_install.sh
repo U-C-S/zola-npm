@@ -47,7 +47,7 @@ elif [[ "$OSTYPE" == "win32" ]]; then
   npm install --prefer-offline --no-audit ./u-c-s-zola-win32-*.tgz
 fi
 
-npm install --prefer-offline --no-audit cowsay ./zola-bin-1.*.tgz 
+npm install --prefer-offline --no-audit cowsay ./zola-bin-2.*.tgz 
 npm exec -c 'cowsay Zola'
 npm exec -c 'zola-bin --version'
 
