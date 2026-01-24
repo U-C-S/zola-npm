@@ -4,31 +4,38 @@
 [![npm](https://img.shields.io/npm/v/@u-c-s/zola-linux-x64-gnu?label=zola-npm-latest)](https://www.npmjs.com/package/@u-c-s/zola-linux-x64-gnu)
 [![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/getzola/zola?label=zola-official-latest)](https://github.com/getzola/zola/releases)
 
+This package provides Node.js bindings, command-line and javascript API for **Zola**
+
+Compiled directly from its source code and bindings exposed via [Node-API](https://nodejs.org/api/n-api.html), 
+The performance is closer to that of native/official zola binaries while having the convenience of an npm 
+package, making deployment easier across various environments/platforms wherever Node.js is supported.
+
+## What's Zola ?
+
 Zola is a static site generator (SSG), similar to Hugo, Pelican, and Jekyll. It is written in Rust and uses
 the [Tera](https://tera.netlify.com/) template engine, which is similar to Jinja2, Django templates, Liquid,
 and Twig. Content is written in [CommonMark](https://commonmark.org/), a strongly defined, highly compatible
 specification of Markdown.
 
-### Official Links
+### Links
 
 - [Website](https://www.getzola.org/)
 - [Documentation](https://www.getzola.org/documentation/getting-started/overview/)
 - [Forum](https://zola.discourse.group/)
 - [Github Repo](https://github.com/getzola/zola)
 
-### Why Zola as a NPM package ??
+## Supported Platforms
 
-This package provides Node.js bindings for Zola, compiled directly from its source code and exposed via
-[Node-API](https://nodejs.org/api/n-api.html) or standard JavaScript calls. This approach ensures performance
-close to that of native binaries while offering the convenience of an npm package, making deployment easier
-across various environments due to Node.js' extensive ecosystem and support.
+- win32 (x64)
+- linux (x64)
+- darwin (x64, arm64)
 
 ## Usage
 
-Add it as a dependency into your project or a new one, using....
+Add it as a dev dependency into your npm project
 
 ```bash
-npm i zola-bin
+npm i -D zola-bin
 ```
 
 or
@@ -41,8 +48,9 @@ npm i -g zola-bin
 
 Format: `npx zola-bin [args]`
 
-`args` are same as official zola [CLI](https://www.getzola.org/documentation/getting-started/cli-usage/).
-Additionally, In your project's `package.json` file, you call it inside a script after adding it as a devDependency.
+Use the `args` from the official [Zola's CLI](https://www.getzola.org/documentation/getting-started/cli-usage/).
+
+You can also add it to scripts in the `package.json` file
 
 ```json
 "scripts": {
@@ -139,6 +147,5 @@ And then you can add the following script to your `package.json` file:
 
 - Why would I use this instead of the official one ?
 
-  - Because for few who are used to NPM, this package makes it feel more like its a part of NPM ecosystem.
-  - Easyily deploy the sites since Node.js and NPM are accepted by most of the hosting services.
-  - Simple installation and usage.
+  - For those who are used to NPM, this package makes it feel home
+  - Easily deploy the sites since Node.js and NPM are accepted by most hosting services.
