@@ -72,7 +72,7 @@ fn init_populate(path: &Path, compile_sass: bool, config: &str) -> errors::Resul
     if !path.exists() {
         create_dir(path)?;
     }
-    create_file(&path.join("config.toml"), config)?;
+    create_file(&path.join("zola.toml"), config)?;
     create_dir(path.join("content"))?;
     create_dir(path.join("templates"))?;
     create_dir(path.join("static"))?;
@@ -223,7 +223,7 @@ pub fn zola_command_parse(input: Vec<String>) {
         Command::Build { base_url, output_dir, force, drafts, minify } => {
             log::info!("Building site...");
             let start = Instant::now();
-            let (root_dir, config_file) = get_config_file_path(&cli_dir, &cli.config);
+            let (root_dir, config_file) = get_config_file_path(&cli_dir, cli.config.as_deref());
             match cmd::build(
                 &root_dir,
                 &config_file,
@@ -266,7 +266,7 @@ pub fn zola_command_parse(input: Vec<String>) {
                 });
             }
 
-            let (root_dir, config_file) = get_config_file_path(&cli_dir, &cli.config);
+            let (root_dir, config_file) = get_config_file_path(&cli_dir, cli.config.as_deref());
             log::info!("Building site...");
             if let Err(e) = cmd::serve(
                 &root_dir,
@@ -292,7 +292,7 @@ pub fn zola_command_parse(input: Vec<String>) {
         Command::Check { drafts, skip_external_links } => {
             log::info!("Checking site...");
             let start = Instant::now();
-            let (root_dir, config_file) = get_config_file_path(&cli_dir, &cli.config);
+            let (root_dir, config_file) = get_config_file_path(&cli_dir, cli.config.as_deref());
             match cmd::check(&root_dir, &config_file, None, None, drafts, skip_external_links) {
                 Ok(()) => messages::report_elapsed_time(start),
                 Err(e) => {
@@ -310,21 +310,47 @@ pub fn zola_command_parse(input: Vec<String>) {
     // End of main.rs / fn main() copy
 }
 
-fn get_config_file_path(dir: &Path, config_path: &Path) -> (PathBuf, PathBuf) {
-    let root_dir = dir.ancestors().find(|a| a.join(config_path).exists()).unwrap_or_else(|| {
-        messages::unravel_errors(
-            "",
-            &anyhow!(
-                "{} not found in current directory or ancestors, current_dir is {}",
-                config_path.display(),
-                dir.display()
-            ),
-        );
-        std::process::exit(1);
-    });
+fn get_config_file_path(dir: &Path, config_path: Option<&Path>) -> (PathBuf, PathBuf) {
+    let (root_dir, config_path) = match config_path {
+        Some(path) => {
+            // User specified a config file, use it directly
+            let root = dir.ancestors().find(|a| a.join(path).exists()).unwrap_or_else(|| {
+                messages::unravel_errors(
+                    "",
+                    &anyhow!(
+                        "{} not found in current directory or ancestors, current_dir is {}",
+                        path.display(),
+                        dir.display()
+                    ),
+                );
+                std::process::exit(1);
+            });
+            (root, path.to_path_buf())
+        }
+        None => {
+            // Try zola.toml first, then fall back to config.toml
+            let zola_config = Path::new("zola.toml");
+            let legacy_config = Path::new("config.toml");
+
+            if let Some(root) = dir.ancestors().find(|a| a.join(zola_config).exists()) {
+                (root, zola_config.to_path_buf())
+            } else if let Some(root) = dir.ancestors().find(|a| a.join(legacy_config).exists()) {
+                (root, legacy_config.to_path_buf())
+            } else {
+                messages::unravel_errors(
+                    "",
+                    &anyhow!(
+                        "zola.toml (or config.toml) not found in current directory or ancestors, current_dir is {}",
+                        dir.display()
+                    ),
+                );
+                std::process::exit(1);
+            }
+        }
+    };
 
     // if we got here we found root_dir so config file should exist so we could theoretically unwrap safely
-    let config_file_uncanonicalized = root_dir.join(config_path);
+    let config_file_uncanonicalized = root_dir.join(&config_path);
     let config_file = config_file_uncanonicalized.canonicalize().unwrap_or_else(|e| {
         messages::unravel_errors(
             &format!("Could not find canonical path of {}", config_file_uncanonicalized.display()),
