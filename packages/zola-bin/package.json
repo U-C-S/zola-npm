@@ -1,0 +1,59 @@
+{
+	"name": "zola-bin",
+	"version": "2.1.0",
+	"author": "U-C-S",
+	"license": "MIT",
+	"description": "Zola, A Static Site Generator, as a NPM Package",
+	"homepage": "https://github.com/U-C-S/zola-npm",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/U-C-S/zola-npm.git"
+	},
+	"bin": {
+		"zola-bin": "bin/zola.js"
+	},
+	"main": "dist/main.js",
+	"types": "types/main.d.ts",
+	"files": [
+		"bin",
+		"dist",
+		"types",
+		"bindings.js",
+		"bindings.d.ts",
+		"CHANGELOG.md"
+	],
+	"scripts": {
+		"build": "tsc"
+	},
+	"devDependencies": {
+		"@types/node": "^25.0.9",
+		"typescript": "^5.9.3"
+	},
+	"engines": {
+		"node": ">= 20"
+	},
+	"keywords": [
+		"zola",
+		"tera",
+		"static-site-generator",
+		"ssg",
+		"markdown",
+		"rust",
+		"html",
+		"scss",
+		"sass",
+		"bin",
+		"cli",
+		"front-end",
+		"framework"
+	],
+	"bugs": {
+		"url": "https://github.com/U-C-S/zola-npm/issues"
+	},
+	"optionalDependencies": {
+		"@u-c-s/zola-darwin-x64": "0.22.0",
+		"@u-c-s/zola-darwin-arm64": "0.22.0",
+		"@u-c-s/zola-linux-x64-gnu": "0.22.0",
+		"@u-c-s/zola-win32-x64-msvc": "0.22.0"
+	}
+}
