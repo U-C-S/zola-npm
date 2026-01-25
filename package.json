@@ -8,7 +8,7 @@
 	"scripts": {
 		"artifacts": "napi artifacts",
 		"setup": "node utils/setup.mjs",
-		"build": "napi build --platform --release --manifest-path ./zola/Cargo.toml --dts packages/zola-bin/bindings.d.ts --js packages/zola-bin/bindings.js --js-package-name @u-c-s/zola -o ./",
+		"build": "NODE_ENV=prod node utils/build.mjs",
 		"build:debug": "node utils/build.mjs",
 		"universal": "napi universalize",
 		"test:npm-i": "sh ./examples/test_install.sh",
