@@ -1,16 +1,16 @@
 {
 	"name": "zola-npm",
 	"private": true,
+	"type": "module",
 	"workspaces": [
 		"packages/zola-bin",
 		"packages/create-zola-site"
 	],
 	"scripts": {
-		"artifacts": "napi artifacts",
-		"setup": "node utils/setup.mjs",
-		"build": "NODE_ENV=prod node utils/build.mjs",
-		"build:debug": "node utils/build.mjs",
-		"universal": "napi universalize",
+		"artifacts": "napi artifacts --npm-dir ./packages/zola-binary-packages",
+		"setup": "node utils/setup.js",
+		"build:release": "NODE_ENV=prod node utils/build.js",
+		"build": "node utils/build.js",
 		"test:npm-i": "sh ./examples/test_install.sh",
 		"test:czs": "sh ./examples/test_czs.sh"
 	},
