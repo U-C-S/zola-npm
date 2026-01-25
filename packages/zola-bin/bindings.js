@@ -75,12 +75,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-android-arm64')
-        const bindingPackageVersion = require('@u-c-s/zola-android-arm64/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-android-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -91,12 +86,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-android-arm-eabi')
-        const bindingPackageVersion = require('@u-c-s/zola-android-arm-eabi/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-android-arm-eabi')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -112,12 +102,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-win32-x64-gnu')
-        const bindingPackageVersion = require('@u-c-s/zola-win32-x64-gnu/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-win32-x64-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -128,12 +113,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-win32-x64-msvc')
-        const bindingPackageVersion = require('@u-c-s/zola-win32-x64-msvc/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-win32-x64-msvc')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -145,12 +125,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-win32-ia32-msvc')
-        const bindingPackageVersion = require('@u-c-s/zola-win32-ia32-msvc/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-win32-ia32-msvc')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -161,12 +136,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-win32-arm64-msvc')
-        const bindingPackageVersion = require('@u-c-s/zola-win32-arm64-msvc/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-win32-arm64-msvc')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -180,12 +150,7 @@ function requireNative() {
       loadErrors.push(e)
     }
     try {
-      const binding = require('@u-c-s/zola-darwin-universal')
-      const bindingPackageVersion = require('@u-c-s/zola-darwin-universal/package.json').version
-      if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-        throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-      }
-      return binding
+      return require('@u-c-s/zola-darwin-universal')
     } catch (e) {
       loadErrors.push(e)
     }
@@ -196,12 +161,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-darwin-x64')
-        const bindingPackageVersion = require('@u-c-s/zola-darwin-x64/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-darwin-x64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -212,12 +172,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-darwin-arm64')
-        const bindingPackageVersion = require('@u-c-s/zola-darwin-arm64/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-darwin-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -232,12 +187,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-freebsd-x64')
-        const bindingPackageVersion = require('@u-c-s/zola-freebsd-x64/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-freebsd-x64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -248,12 +198,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-freebsd-arm64')
-        const bindingPackageVersion = require('@u-c-s/zola-freebsd-arm64/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-freebsd-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -269,12 +214,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-x64-musl')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-x64-musl/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-x64-musl')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -285,12 +225,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-x64-gnu')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-x64-gnu/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-x64-gnu')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -303,12 +238,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-arm64-musl')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-arm64-musl/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-arm64-musl')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -319,12 +249,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-arm64-gnu')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-arm64-gnu/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-arm64-gnu')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -337,12 +262,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-arm-musleabihf')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-arm-musleabihf/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-arm-musleabihf')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -353,12 +273,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-arm-gnueabihf')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-arm-gnueabihf/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-arm-gnueabihf')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -371,12 +286,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-loong64-musl')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-loong64-musl/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-loong64-musl')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -387,12 +297,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-loong64-gnu')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-loong64-gnu/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-loong64-gnu')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -405,12 +310,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-riscv64-musl')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-riscv64-musl/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-riscv64-musl')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -421,12 +321,7 @@ function requireNative() {
           loadErrors.push(e)
         }
         try {
-          const binding = require('@u-c-s/zola-linux-riscv64-gnu')
-          const bindingPackageVersion = require('@u-c-s/zola-linux-riscv64-gnu/package.json').version
-          if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-            throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-          }
-          return binding
+          return require('@u-c-s/zola-linux-riscv64-gnu')
         } catch (e) {
           loadErrors.push(e)
         }
@@ -438,12 +333,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-linux-ppc64-gnu')
-        const bindingPackageVersion = require('@u-c-s/zola-linux-ppc64-gnu/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-linux-ppc64-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -454,12 +344,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-linux-s390x-gnu')
-        const bindingPackageVersion = require('@u-c-s/zola-linux-s390x-gnu/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-linux-s390x-gnu')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -474,12 +359,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-openharmony-arm64')
-        const bindingPackageVersion = require('@u-c-s/zola-openharmony-arm64/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-openharmony-arm64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -490,12 +370,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-openharmony-x64')
-        const bindingPackageVersion = require('@u-c-s/zola-openharmony-x64/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-openharmony-x64')
       } catch (e) {
         loadErrors.push(e)
       }
@@ -506,12 +381,7 @@ function requireNative() {
         loadErrors.push(e)
       }
       try {
-        const binding = require('@u-c-s/zola-openharmony-arm')
-        const bindingPackageVersion = require('@u-c-s/zola-openharmony-arm/package.json').version
-        if (bindingPackageVersion !== '2.1.0' && process.env.NAPI_RS_ENFORCE_VERSION_CHECK && process.env.NAPI_RS_ENFORCE_VERSION_CHECK !== '0') {
-          throw new Error(`Native binding package version mismatch, expected 2.1.0 but got ${bindingPackageVersion}. You can reinstall dependencies to fix this issue.`)
-        }
-        return binding
+        return require('@u-c-s/zola-openharmony-arm')
       } catch (e) {
         loadErrors.push(e)
       }
