@@ -3,8 +3,8 @@ import { parse, stringify } from "smol-toml";
 
 console.log(`-> Current working directory: ${process.cwd()}`);
 
-copyFile("utils/lib.rs", "zola/src/lib.rs");
-copyFile("utils/build.rs", "zola/build.rs");
+copyFile("utils/assets/lib.rs", "zola/src/lib.rs");
+copyFile("utils/assets/build.rs", "zola/build.rs");
 
 const zolaToml = await readFile("zola/Cargo.toml", { encoding: "utf8" });
 const zolaTomlParsed = parse(zolaToml);
