@@ -1,42 +1,24 @@
 {
-	"name": "zola-bin",
-	"version": "2.1.0",
-	"author": "U-C-S",
-	"license": "MIT",
-	"description": "Zola, A Static Site Generator, as a NPM Package",
-	"homepage": "https://github.com/U-C-S/zola-npm",
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/U-C-S/zola-npm.git"
-	},
-	"bin": {
-		"zola-bin": "bin/zola.js"
-	},
-	"main": "dist/main.js",
-	"types": "types/main.d.ts",
-	"files": [
-		"bin",
-		"dist",
-		"types",
-		"bindings.js",
-		"bindings.d.ts",
-		"CHANGELOG.md"
+	"name": "zola-npm",
+	"private": true,
+	"type": "module",
+	"workspaces": [
+		"packages/zola-bin",
+		"packages/create-zola-site"
 	],
 	"scripts": {
-		"artifacts": "napi artifacts",
-		"setup": "node src/setup.mjs",
-		"build": "napi build --platform --release --manifest-path ./zola/Cargo.toml --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola -o ./",
-		"build:debug": "napi build --platform --manifest-path ./zola/Cargo.toml --dts bindings.d.ts --js bindings.js --js-package-name @u-c-s/zola -o ./",
-		"build:zola-bin": "tsc",
-		"universal": "napi universalize",
+		"artifacts": "napi artifacts --npm-dir ./packages/zola-binary-packages",
+		"setup": "node utils/setup.js",
+		"build:zola-bin": "npm run build --workspace=zola-bin",
+		"build:release": "NODE_ENV=prod node utils/build.js",
+		"build": "node utils/build.js",
 		"test:npm-i": "sh ./examples/test_install.sh",
 		"test:czs": "sh ./examples/test_czs.sh"
 	},
 	"devDependencies": {
 		"@napi-rs/cli": "^3.5.1",
 		"@types/node": "^25.0.9",
-		"smol-toml": "^1.6.0",
-		"typescript": "^5.9.3"
+		"smol-toml": "^1.6.0"
 	},
 	"engines": {
 		"node": ">= 20"
@@ -55,33 +37,5 @@
 		"tabWidth": 2,
 		"useTabs": true,
 		"printWidth": 110
-	},
-	"keywords": [
-		"zola",
-		"tera",
-		"static-site-generator",
-		"ssg",
-		"markdown",
-		"rust",
-		"html",
-		"scss",
-		"sass",
-		"bin",
-		"cli",
-		"front-end",
-		"framework"
-	],
-	"directories": {
-		"example": "examples",
-		"lib": "lib"
-	},
-	"bugs": {
-		"url": "https://github.com/U-C-S/zola-npm/issues"
-	},
-	"optionalDependencies": {
-		"@u-c-s/zola-darwin-x64": "0.22.0",
-		"@u-c-s/zola-darwin-arm64": "0.22.0",
-		"@u-c-s/zola-linux-x64-gnu": "0.22.0",
-		"@u-c-s/zola-win32-x64-msvc": "0.22.0"
 	}
 }
