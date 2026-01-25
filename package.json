@@ -9,6 +9,7 @@
 	"scripts": {
 		"artifacts": "napi artifacts --npm-dir ./packages/zola-binary-packages",
 		"setup": "node utils/setup.js",
+		"build:zola-bin": "npm run build --workspace=zola-bin",
 		"build:release": "NODE_ENV=prod node utils/build.js",
 		"build": "node utils/build.js",
 		"test:npm-i": "sh ./examples/test_install.sh",
